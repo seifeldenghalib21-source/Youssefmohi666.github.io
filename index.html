@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الجهة العامة للخدمات البيطرية — منصة الموردين</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <div class="logo-icon">🐄</div>
+      <div class="logo-text">
+        <span class="logo-main">الجهة العامة</span>
+        <span class="logo-sub">للخدمات البيطرية</span>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link active">الرئيسية</a></li>
+      <li><a href="products.html" class="nav-link">المنتجات</a></li>
+      <li><a href="research.html" class="nav-link">البحوث</a></li>
+      <li><a href="about.html" class="nav-link">من نحن</a></li>
+      <li><a href="ministerword.html" class="nav-link">كلمة الوزير</a></li>
+      <li><a href="contact.html" class="nav-link">تواصل معنا</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="supplier-register.html" class="nav-btn btn-outline">تسجيل مورد</a></li>
+      <li><a href="dashboard.html" class="nav-btn btn-filled">حسابي</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-shape shape-1"></div>
+    <div class="hero-shape shape-2"></div>
+    <div class="hero-shape shape-3"></div>
+    <div class="grain"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      منصة رسمية معتمدة
+    </div>
+    <h1 class="hero-title">
+      منصة <span class="title-accent">توريد</span><br>
+      الثروة الحيوانية
+    </h1>
+    <p class="hero-desc">
+      المنصة الرسمية للجهة العامة للخدمات البيطرية في مصر<br>
+      لشراء وتوريد العجول والأبقار والجاموس بكل شفافية واحترافية
+    </p>
+    <div class="hero-actions">
+      <a href="products.html" class="btn-primary">استعرض الحيوانات</a>
+      <a href="supplier-register.html" class="btn-secondary">سجّل كمورد</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num" data-target="1240">0</span>
+        <span class="stat-label">حيوان متاح</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="380">0</span>
+        <span class="stat-label">مورد مسجّل</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num" data-target="96">0</span>
+        <span class="stat-label">% نسبة الرضا</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="visual-card card-float">
+      <div class="vc-header">
+        <span class="vc-dot green"></span>
+        <span class="vc-dot yellow"></span>
+        <span class="vc-dot red"></span>
+      </div>
+      <div class="vc-animal">🐄</div>
+      <div class="vc-info">
+        <div class="vc-name">جاموسة بلدية ممتازة</div>
+        <div class="vc-meta">الوزن: ٤٥٠ كجم | العمر: ٣ سنوات</div>
+        <div class="vc-price">٢٨,٠٠٠ جنيه</div>
+      </div>
+      <div class="vc-badge">متاح للبيع</div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Animals -->
+<section class="featured section-pad">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">أحدث العروض</div>
+      <h2 class="section-title">حيوانات مميزة للبيع</h2>
+      <p class="section-desc">اختر من أفضل المواشي المعتمدة والمفحوصة بيطرياً</p>
+    </div>
+    <div class="animals-grid">
+      <div class="animal-card" onclick="window.location='products.html'">
+        <div class="animal-img-wrap">
+          <span class="animal-emoji">🐂</span>
+          <div class="animal-status">متاح</div>
+        </div>
+        <div class="animal-body">
+          <div class="animal-tag">بقر</div>
+          <h3 class="animal-name">عجل هولشتاين</h3>
+          <div class="animal-specs">
+            <span>⚖️ ٣٨٠ كجم</span>
+            <span>📅 ٢ سنة</span>
+            <span>📍 القاهرة</span>
+          </div>
+          <div class="animal-footer">
+            <span class="animal-price">٢٢,٥٠٠ ج.م</span>
+            <button class="animal-btn" onclick="window.location='products.html'">التفاصيل</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="animal-card featured-card" onclick="window.location='products.html'">
+        <div class="featured-ribbon">الأكثر طلباً</div>
+        <div class="animal-img-wrap">
+          <span class="animal-emoji">🐃</span>
+          <div class="animal-status">متاح</div>
+        </div>
+        <div class="animal-body">
+          <div class="animal-tag buffalo">جاموس</div>
+          <h3 class="animal-name">جاموسة بلدية فحل</h3>
+          <div class="animal-specs">
+            <span>⚖️ ٥٢٠ كجم</span>
+            <span>📅 ٤ سنوات</span>
+            <span>📍 الدلتا</span>
+          </div>
+          <div class="animal-footer">
+            <span class="animal-price">٣٥,٠٠٠ ج.م</span>
+            <button class="animal-btn" onclick="window.location='products.html'">التفاصيل</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="animal-card" onclick="window.location='products.html'">
+        <div class="animal-img-wrap">
+          <span class="animal-emoji">🐄</span>
+          <div class="animal-status">متاح</div>
+        </div>
+        <div class="animal-body">
+          <div class="animal-tag">بقر</div>
+          <h3 class="animal-name">بقرة فريزيان</h3>
+          <div class="animal-specs">
+            <span>⚖️ ٤٢٠ كجم</span>
+            <span>📅 ٣ سنوات</span>
+            <span>📍 الإسكندرية</span>
+          </div>
+          <div class="animal-footer">
+            <span class="animal-price">٢٨,٠٠٠ ج.م</span>
+            <button class="animal-btn" onclick="window.location='products.html'">التفاصيل</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-cta">
+      <a href="products.html" class="btn-primary">عرض جميع الحيوانات</a>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works section-pad bg-dark">
+  <div class="container">
+    <div class="section-header light">
+      <div class="section-tag">كيف تعمل المنصة</div>
+      <h2 class="section-title">خطوات بسيطة للبيع</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon">📝</div>
+        <h3>سجّل كمورد</h3>
+        <p>أنشئ حسابك وأكمل بيانات التوريد والوثائق المطلوبة</p>
+      </div>
+      <div class="step-arrow">←</div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon">🐄</div>
+        <h3>أضف حيواناتك</h3>
+        <p>أدخل تفاصيل الحيوانات مع الصور والشهادات البيطرية</p>
+      </div>
+      <div class="step-arrow">←</div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon">✅</div>
+        <h3>انتظر المراجعة</h3>
+        <p>يراجع موظفو الجهة عرضك ويتواصلون معك للتأكيد</p>
+      </div>
+      <div class="step-arrow">←</div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-icon">💰</div>
+        <h3>استلم الدفع</h3>
+        <p>بعد الموافقة والاستلام، يتم تحويل المبلغ فوراً</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News & Updates -->
+<section class="news section-pad">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">آخر الأخبار</div>
+      <h2 class="section-title">أخبار ومستجدات الجهة</h2>
+    </div>
+    <div class="news-grid">
+      <div class="news-card large">
+        <div class="news-date">١٥ مارس ٢٠٢٦</div>
+        <h3>الجهة تطلق منصة رقمية لتوريد الثروة الحيوانية</h3>
+        <p>أعلنت الجهة العامة للخدمات البيطرية عن إطلاق منصتها الرقمية الجديدة التي تهدف إلى تسهيل عمليات التوريد وتحقيق الشفافية الكاملة في التعاملات.</p>
+        <a href="#" class="news-link">اقرأ المزيد ←</a>
+      </div>
+      <div class="news-card">
+        <div class="news-date">١٠ مارس ٢٠٢٦</div>
+        <h3>فحص ٥٠٠ رأس ماشية في حملة بيطرية</h3>
+        <p>نجحت الجهة في إجراء فحوصات بيطرية شاملة لـ ٥٠٠ رأس ماشية عبر حملة ميدانية.</p>
+        <a href="#" class="news-link">اقرأ المزيد ←</a>
+      </div>
+      <div class="news-card">
+        <div class="news-date">٥ مارس ٢٠٢٦</div>
+        <h3>شروط جديدة لتسجيل الموردين لعام ٢٠٢٦</h3>
+        <p>أعلنت الجهة عن تحديث اشتراطات تسجيل الموردين وفقاً للوائح المعدلة.</p>
+        <a href="#" class="news-link">اقرأ المزيد ←</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner">
+  <div class="cta-content">
+    <h2>هل أنت مورد ماشية؟</h2>
+    <p>انضم لأكثر من ٣٨٠ مورد مسجّل وابدأ في عرض حيواناتك اليوم</p>
+    <a href="supplier-register.html" class="btn-white">سجّل الآن مجاناً</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">🐄 الجهة العامة للخدمات البيطرية</div>
+        <p>منصة رسمية لتوريد الثروة الحيوانية في جمهورية مصر العربية</p>
+        <div class="social-links">
+          <a href="#">📘</a>
+          <a href="#">🐦</a>
+          <a href="#">📸</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="products.html">المنتجات</a></li>
+          <li><a href="about.html">من نحن</a></li>
+          <li><a href="research.html">البحوث</a></li>
+          <li><a href="ministerword.html">كلمة الوزير</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>للموردين</h4>
+        <ul>
+          <li><a href="supplier-register.html">تسجيل مورد جديد</a></li>
+          <li><a href="supplier-dashboard.html">لوحة المورد</a></li>
+          <li><a href="dashboard.html">إعدادات الحساب</a></li>
+          <li><a href="admin.html">لوحة الإدارة</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>تواصل معنا</h4>
+        <p>📞 19XXX</p>
+        <p>📧 info@vet-services.gov.eg</p>
+        <p>📍 القاهرة، جمهورية مصر العربية</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© ٢٠٢٦ الجهة العامة للخدمات البيطرية — جميع الحقوق محفوظة</p>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
