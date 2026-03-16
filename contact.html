@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تواصل معنا — الجهة العامة للخدمات البيطرية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <div class="logo-icon">🐄</div>
+      <div class="logo-text">
+        <span class="logo-main">الجهة العامة</span>
+        <span class="logo-sub">للخدمات البيطرية</span>
+      </div>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+      <li><a href="products.html" class="nav-link">المنتجات</a></li>
+      <li><a href="research.html" class="nav-link">البحوث</a></li>
+      <li><a href="about.html" class="nav-link">من نحن</a></li>
+      <li><a href="ministerword.html" class="nav-link">كلمة الوزير</a></li>
+      <li><a href="contact.html" class="nav-link active">تواصل معنا</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="supplier-register.html" class="nav-btn btn-outline">تسجيل مورد</a></li>
+      <li><a href="dashboard.html" class="nav-btn btn-filled">حسابي</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">الرئيسية</a> ← تواصل معنا</div>
+  <h1>تواصل معنا</h1>
+  <p>نحن هنا للإجابة على استفساراتك ومساعدتك في كل ما تحتاجه</p>
+</div>
+
+<div class="contact-layout">
+  <!-- Info -->
+  <div class="contact-info">
+    <h2>معلومات التواصل</h2>
+
+    <div class="contact-item">
+      <div class="contact-icon">📞</div>
+      <div class="contact-text">
+        <h4>الخط الساخن</h4>
+        <p>19XXX (متاح ٢٤ ساعة)</p>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon">📧</div>
+      <div class="contact-text">
+        <h4>البريد الإلكتروني</h4>
+        <p>info@vet-services.gov.eg</p>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon">🏢</div>
+      <div class="contact-text">
+        <h4>العنوان الرئيسي</h4>
+        <p>القاهرة، جمهورية مصر العربية<br>شارع الدقي، الجيزة</p>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon">🕐</div>
+      <div class="contact-text">
+        <h4>ساعات العمل</h4>
+        <p>الأحد – الخميس: ٩ ص – ٤ م<br>الجمعة والسبت: إجازة رسمية</p>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon">📠</div>
+      <div class="contact-text">
+        <h4>فاكس</h4>
+        <p>02-XXXX-XXXX</p>
+      </div>
+    </div>
+
+    <!-- Map placeholder -->
+    <div style="margin-top: 24px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);">
+      <div style="background: linear-gradient(135deg, var(--green-xlight), #fff9e6); height: 200px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;">
+        <span style="font-size: 3rem;">🗺️</span>
+        <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">موقع الجهة على الخريطة</span>
+        <a href="https://maps.google.com" target="_blank" class="btn-primary" style="font-size: 0.85rem; padding: 8px 18px; text-decoration:none">فتح الخريطة ←</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="contact-form-wrap">
+    <h2>أرسل رسالة</h2>
+    <form id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>الاسم الكامل *</label>
+          <input type="text" placeholder="أدخل اسمك" required>
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف *</label>
+          <input type="tel" placeholder="01XXXXXXXXX" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input type="email" placeholder="example@email.com">
+      </div>
+
+      <div class="form-group">
+        <label>موضوع الرسالة *</label>
+        <select required>
+          <option value="">اختر الموضوع...</option>
+          <option>استفسار عن منتج</option>
+          <option>تسجيل مورد</option>
+          <option>شكوى</option>
+          <option>اقتراح</option>
+          <option>أخرى</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>تفاصيل الرسالة *</label>
+        <textarea placeholder="اكتب رسالتك هنا..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">إرسال الرسالة ←</button>
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none">
+      <p>© ٢٠٢٦ الجهة العامة للخدمات البيطرية</p>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

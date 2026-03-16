@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة المورد — الجهة العامة للخدمات البيطرية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <div class="logo-icon">🐄</div>
+      <div class="logo-text">
+        <span class="logo-main">الجهة العامة</span>
+        <span class="logo-sub">للخدمات البيطرية</span>
+      </div>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+      <li><a href="products.html" class="nav-link">المنتجات</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="dashboard.html" class="nav-btn btn-outline">إعدادات الحساب</a></li>
+      <li><a href="index.html" class="nav-btn btn-filled" onclick="showToast('تم تسجيل الخروج')">خروج</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-user">
+      <div class="user-avatar">👨‍🌾</div>
+      <h3>أحمد محمود السيد</h3>
+      <p>مورد معتمد • الغربية</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="supplier-dashboard.html" class="sidebar-link active">
+        <span class="icon">📊</span> لوحة التحكم
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">🐄</span> عروضي
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">➕</span> إضافة حيوان
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">📋</span> طلباتي
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">💬</span> الرسائل
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">💰</span> المدفوعات
+      </a>
+      <a href="dashboard.html" class="sidebar-link">
+        <span class="icon">⚙️</span> إعدادات الحساب
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="dashboard-content">
+    <div class="dash-header">
+      <div>
+        <div class="dash-title">لوحة المورد</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">مرحباً أحمد، هذا ملخص نشاطك</p>
+      </div>
+      <button class="btn-primary" style="border: none; cursor: pointer;" onclick="showToast('فتح نموذج إضافة حيوان')">
+        ➕ إضافة حيوان جديد
+      </button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="dash-cards">
+      <div class="dash-card">
+        <div class="dash-card-icon">🐃</div>
+        <div class="dash-card-num">٧</div>
+        <div class="dash-card-label">حيوانات معروضة</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-icon">✅</div>
+        <div class="dash-card-num">١٢</div>
+        <div class="dash-card-label">صفقات ناجحة</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-icon">⏳</div>
+        <div class="dash-card-num">٣</div>
+        <div class="dash-card-label">طلبات قيد المراجعة</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-icon">💰</div>
+        <div class="dash-card-num">٢٨٤ ألف</div>
+        <div class="dash-card-label">إجمالي المبيعات (ج.م)</div>
+      </div>
+    </div>
+
+    <!-- Offers Table -->
+    <div class="dash-table-wrap" style="margin-bottom: 24px;">
+      <div class="dash-table-head">
+        <h3>عروضي الحالية</h3>
+        <button style="background: none; border: 1px solid var(--border); padding: 7px 14px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 0.85rem;" onclick="showToast('تم تحديث البيانات')">تحديث ↻</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>الحيوان</th>
+            <th>النوع</th>
+            <th>الوزن</th>
+            <th>السعر</th>
+            <th>الحالة</th>
+            <th>الإجراء</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>جاموسة بلدية فحل</td>
+            <td>جاموس</td>
+            <td>٥٢٠ كجم</td>
+            <td>٣٥,٠٠٠ ج.م</td>
+            <td><span class="badge badge-green">معروض</span></td>
+            <td><button style="background:none;border:none;color:var(--green);cursor:pointer;font-weight:700;font-family:inherit" onclick="showToast('فتح التعديل')">تعديل</button></td>
+          </tr>
+          <tr>
+            <td>جاموسة محلبة</td>
+            <td>جاموس</td>
+            <td>٤٨٠ كجم</td>
+            <td>٣٢,٠٠٠ ج.م</td>
+            <td><span class="badge badge-yellow">قيد المراجعة</span></td>
+            <td><button style="background:none;border:none;color:var(--green);cursor:pointer;font-weight:700;font-family:inherit" onclick="showToast('لا يمكن التعديل أثناء المراجعة')">تعديل</button></td>
+          </tr>
+          <tr>
+            <td>جاموس ذكر كبير</td>
+            <td>جاموس</td>
+            <td>٦١٠ كجم</td>
+            <td>٤٢,٠٠٠ ج.م</td>
+            <td><span class="badge badge-green">معروض</span></td>
+            <td><button style="background:none;border:none;color:var(--green);cursor:pointer;font-weight:700;font-family:inherit" onclick="showToast('فتح التعديل')">تعديل</button></td>
+          </tr>
+          <tr>
+            <td>جاموسة صغيرة</td>
+            <td>جاموس</td>
+            <td>٣٢٠ كجم</td>
+            <td>٢١,٠٠٠ ج.م</td>
+            <td><span class="badge badge-blue">محجوز</span></td>
+            <td><button style="background:none;border:none;color:var(--text-muted);cursor:default;font-family:inherit">محجوز</button></td>
+          </tr>
+          <tr>
+            <td>جاموس عراقي</td>
+            <td>جاموس</td>
+            <td>٥٧٠ كجم</td>
+            <td>٣٨,٠٠٠ ج.م</td>
+            <td><span class="badge badge-green">معروض</span></td>
+            <td><button style="background:none;border:none;color:var(--green);cursor:pointer;font-weight:700;font-family:inherit" onclick="showToast('فتح التعديل')">تعديل</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="dash-table-wrap">
+      <div class="dash-table-head">
+        <h3>آخر الطلبات الواردة</h3>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>رقم الطلب</th>
+            <th>الحيوان</th>
+            <th>التاريخ</th>
+            <th>الحالة</th>
+            <th>الإجراء</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#٢٠٢٦-٠٠٨٩</td>
+            <td>جاموسة بلدية فحل</td>
+            <td>١٤ مارس ٢٠٢٦</td>
+            <td><span class="badge badge-yellow">قيد الدراسة</span></td>
+            <td><button class="animal-btn" onclick="showToast('عرض تفاصيل الطلب')">عرض</button></td>
+          </tr>
+          <tr>
+            <td>#٢٠٢٦-٠٠٧٢</td>
+            <td>جاموس ذكر كبير</td>
+            <td>١٠ مارس ٢٠٢٦</td>
+            <td><span class="badge badge-green">تمت الموافقة</span></td>
+            <td><button class="animal-btn" onclick="showToast('عرض تفاصيل الطلب')">عرض</button></td>
+          </tr>
+          <tr>
+            <td>#٢٠٢٦-٠٠٥٨</td>
+            <td>جاموسة محلبة</td>
+            <td>٥ مارس ٢٠٢٦</td>
+            <td><span class="badge badge-red">مرفوض</span></td>
+            <td><button class="animal-btn" onclick="showToast('عرض سبب الرفض')">عرض</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

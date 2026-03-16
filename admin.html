@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة الإدارة — الجهة العامة للخدمات البيطرية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <div class="logo-icon">🐄</div>
+      <div class="logo-text">
+        <span class="logo-main">الجهة العامة</span>
+        <span class="logo-sub">للخدمات البيطرية — الإدارة</span>
+      </div>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">الموقع الرئيسي</a></li>
+      <li class="nav-divider"></li>
+      <li><span style="font-size: 0.85rem; color: var(--text-muted);">مدير النظام</span></li>
+      <li><a href="index.html" class="nav-btn btn-filled" onclick="showToast('تم تسجيل الخروج')">خروج</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-user">
+      <div class="user-avatar">🛡️</div>
+      <h3>مدير النظام</h3>
+      <p>صلاحية كاملة</p>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="admin.html" class="sidebar-link active">
+        <span class="icon">📊</span> لوحة التحكم
+      </a>
+      <a href="#" class="sidebar-link" onclick="showTab('products-panel'); return false;">
+        <span class="icon">🐄</span> إدارة المنتجات
+      </a>
+      <a href="#" class="sidebar-link" onclick="showTab('suppliers-panel'); return false;">
+        <span class="icon">👥</span> إدارة الموردين
+      </a>
+      <a href="#" class="sidebar-link" onclick="showTab('orders-panel'); return false;">
+        <span class="icon">📋</span> الطلبات والعروض
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">📰</span> إدارة الأخبار
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">📈</span> التقارير
+      </a>
+      <a href="#" class="sidebar-link" onclick="showToast('قيد التطوير')">
+        <span class="icon">⚙️</span> الإعدادات العامة
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="dashboard-content">
+    <div class="dash-header">
+      <div>
+        <div class="dash-title">لوحة إدارة المنصة</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">نظرة شاملة على نشاط المنصة</p>
+      </div>
+      <span style="font-size: 0.85rem; color: var(--text-muted);">آخر تحديث: ١٦ مارس ٢٠٢٦</span>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="dash-cards">
+      <div class="dash-card" style="border-right: 4px solid var(--green);">
+        <div class="dash-card-icon">🐃</div>
+        <div class="dash-card-num">١٢</div>
+        <div class="dash-card-label">حيوانات معروضة</div>
+      </div>
+      <div class="dash-card" style="border-right: 4px solid #f59e0b;">
+        <div class="dash-card-icon">⏳</div>
+        <div class="dash-card-num">٨</div>
+        <div class="dash-card-label">عروض قيد المراجعة</div>
+      </div>
+      <div class="dash-card" style="border-right: 4px solid #3b82f6;">
+        <div class="dash-card-icon">👥</div>
+        <div class="dash-card-num">٣٨٠</div>
+        <div class="dash-card-label">مورد مسجّل</div>
+      </div>
+      <div class="dash-card" style="border-right: 4px solid #10b981;">
+        <div class="dash-card-icon">✅</div>
+        <div class="dash-card-num">٢٤٦</div>
+        <div class="dash-card-label">صفقات ناجحة</div>
+      </div>
+    </div>
+
+    <!-- Admin Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-panel="products-panel">🐄 المنتجات</button>
+      <button class="admin-tab" data-panel="suppliers-panel">👥 الموردون</button>
+      <button class="admin-tab" data-panel="orders-panel">📋 الطلبات</button>
+      <button class="admin-tab" data-panel="reviews-panel">🔍 قيد المراجعة</button>
+    </div>
+
+    <!-- Products Panel -->
+    <div id="products-panel" class="admin-panel active">
+      <div class="dash-table-wrap">
+        <div class="dash-table-head">
+          <h3>جميع المنتجات المعروضة</h3>
+          <button class="animal-btn" onclick="showToast('تصدير البيانات...')">تصدير Excel ↓</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>رقم</th>
+              <th>الحيوان</th>
+              <th>النوع</th>
+              <th>الوزن</th>
+              <th>السعر</th>
+              <th>المورد</th>
+              <th>الحالة</th>
+              <th>إجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#٠٠١</td>
+              <td>عجل هولشتاين</td>
+              <td>بقر</td>
+              <td>٣٨٠ كجم</td>
+              <td>٢٢,٥٠٠ ج.م</td>
+              <td>محمد علي</td>
+              <td><span class="badge badge-green">معروض</span></td>
+              <td>
+                <button style="background:none;border:none;color:var(--green);cursor:pointer;font-family:inherit;font-weight:600" onclick="showToast('تعديل المنتج')">تعديل</button>
+                <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-family:inherit;font-weight:600;margin-right:8px" onclick="showToast('تم حذف المنتج')">حذف</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#٠٠٢</td>
+              <td>جاموسة بلدية فحل</td>
+              <td>جاموس</td>
+              <td>٥٢٠ كجم</td>
+              <td>٣٥,٠٠٠ ج.م</td>
+              <td>أحمد محمود</td>
+              <td><span class="badge badge-green">معروض</span></td>
+              <td>
+                <button style="background:none;border:none;color:var(--green);cursor:pointer;font-family:inherit;font-weight:600" onclick="showToast('تعديل المنتج')">تعديل</button>
+                <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-family:inherit;font-weight:600;margin-right:8px" onclick="showToast('تم حذف المنتج')">حذف</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#٠٠٣</td>
+              <td>جاموسة محلبة</td>
+              <td>جاموس</td>
+              <td>٤٨٠ كجم</td>
+              <td>٣٢,٠٠٠ ج.م</td>
+              <td>أحمد محمود</td>
+              <td><span class="badge badge-yellow">مراجعة</span></td>
+              <td>
+                <button class="animal-btn" onclick="showToast('تمت الموافقة على المنتج ✓')" style="background: var(--green); margin-left: 6px;">موافقة</button>
+                <button class="animal-btn" onclick="showToast('تم رفض المنتج')" style="background: #ef4444;">رفض</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#٠٠٤</td>
+              <td>بقرة فريزيان</td>
+              <td>بقر</td>
+              <td>٤٢٠ كجم</td>
+              <td>٢٨,٠٠٠ ج.م</td>
+              <td>سامي حسن</td>
+              <td><span class="badge badge-blue">محجوز</span></td>
+              <td>
+                <button style="background:none;border:none;color:var(--green);cursor:pointer;font-family:inherit;font-weight:600" onclick="showToast('عرض التفاصيل')">تفاصيل</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Suppliers Panel -->
+    <div id="suppliers-panel" class="admin-panel">
+      <div class="dash-table-wrap">
+        <div class="dash-table-head">
+          <h3>قائمة الموردين المسجّلين</h3>
+          <button class="animal-btn" onclick="showToast('تصدير البيانات...')">تصدير Excel ↓</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>المورد</th>
+              <th>الهاتف</th>
+              <th>المحافظة</th>
+              <th>عدد العروض</th>
+              <th>تاريخ التسجيل</th>
+              <th>الحالة</th>
+              <th>إجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>أحمد محمود السيد</td>
+              <td>01012345678</td>
+              <td>الغربية</td>
+              <td>٧</td>
+              <td>١٥ يناير ٢٠٢٦</td>
+              <td><span class="badge badge-green">نشط</span></td>
+              <td>
+                <button style="background:none;border:none;color:var(--green);cursor:pointer;font-family:inherit;font-weight:600" onclick="showToast('عرض ملف المورد')">عرض</button>
+                <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-family:inherit;font-weight:600;margin-right:8px" onclick="showToast('تم تعليق الحساب')">تعليق</button>
+              </td>
+            </tr>
+            <tr>
+              <td>محمد علي إبراهيم</td>
+              <td>01198765432</td>
+              <td>القاهرة</td>
+              <td>٣</td>
+              <td>٢٠ يناير ٢٠٢٦</td>
+              <td><span class="badge badge-green">نشط</span></td>
+              <td>
+                <button style="background:none;border:none;color:var(--green);cursor:pointer;font-family:inherit;font-weight:600" onclick="showToast('عرض ملف المورد')">عرض</button>
+                <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-family:inherit;font-weight:600;margin-right:8px" onclick="showToast('تم تعليق الحساب')">تعليق</button>
+              </td>
+            </tr>
+            <tr>
+              <td>سامي حسن طاهر</td>
+              <td>01234567890</td>
+              <td>الإسكندرية</td>
+              <td>١</td>
+              <td>١ فبراير ٢٠٢٦</td>
+              <td><span class="badge badge-yellow">قيد المراجعة</span></td>
+              <td>
+                <button class="animal-btn" onclick="showToast('تمت الموافقة ✓')" style="background: var(--green); margin-left: 6px;">قبول</button>
+                <button class="animal-btn" onclick="showToast('تم الرفض')" style="background: #ef4444;">رفض</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Orders Panel -->
+    <div id="orders-panel" class="admin-panel">
+      <div class="dash-table-wrap">
+        <div class="dash-table-head">
+          <h3>سجل الطلبات الكاملة</h3>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>رقم الطلب</th>
+              <th>الحيوان</th>
+              <th>المورد</th>
+              <th>القيمة</th>
+              <th>التاريخ</th>
+              <th>الحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#٢٠٢٦-٠٠٨٩</td>
+              <td>جاموسة بلدية فحل</td>
+              <td>أحمد محمود</td>
+              <td>٣٥,٠٠٠ ج.م</td>
+              <td>١٤ مارس ٢٠٢٦</td>
+              <td><span class="badge badge-yellow">قيد الدراسة</span></td>
+            </tr>
+            <tr>
+              <td>#٢٠٢٦-٠٠٧٢</td>
+              <td>جاموس ذكر كبير</td>
+              <td>أحمد محمود</td>
+              <td>٤٢,٠٠٠ ج.م</td>
+              <td>١٠ مارس ٢٠٢٦</td>
+              <td><span class="badge badge-green">تمت الموافقة</span></td>
+            </tr>
+            <tr>
+              <td>#٢٠٢٦-٠٠٥٨</td>
+              <td>جاموسة محلبة</td>
+              <td>أحمد محمود</td>
+              <td>٣٢,٠٠٠ ج.م</td>
+              <td>٥ مارس ٢٠٢٦</td>
+              <td><span class="badge badge-red">مرفوض</span></td>
+            </tr>
+            <tr>
+              <td>#٢٠٢٦-٠٠٤١</td>
+              <td>عجل هولشتاين</td>
+              <td>محمد علي</td>
+              <td>٢٢,٥٠٠ ج.م</td>
+              <td>١ مارس ٢٠٢٦</td>
+              <td><span class="badge badge-green">تمت الموافقة</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reviews Panel -->
+    <div id="reviews-panel" class="admin-panel">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="settings-card" style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:20px;">
+          <div style="display: flex; align-items: flex-start; gap: 16px; justify-content: space-between; flex-wrap: wrap;">
+            <div>
+              <span class="badge badge-yellow" style="margin-bottom: 8px; display: inline-block;">قيد المراجعة</span>
+              <h4 style="font-weight:700; margin-bottom: 4px;">جاموسة محلبة — أحمد محمود السيد</h4>
+              <p style="font-size:0.85rem; color: var(--text-muted);">الوزن: ٤٨٠ كجم | السعر: ٣٢,٠٠٠ ج.م | المحافظة: الغربية</p>
+              <p style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">تاريخ الطلب: ٢٠ فبراير ٢٠٢٦</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="animal-btn" onclick="showToast('تمت الموافقة على العرض ✓')" style="background: var(--green);">موافقة ✓</button>
+              <button class="animal-btn" onclick="showToast('تم رفض العرض')" style="background: #ef4444;">رفض ✗</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-card" style="background:white; border:1px solid var(--border); border-radius:var(--radius); padding:20px;">
+          <div style="display: flex; align-items: flex-start; gap: 16px; justify-content: space-between; flex-wrap: wrap;">
+            <div>
+              <span class="badge badge-yellow" style="margin-bottom: 8px; display: inline-block;">قيد المراجعة</span>
+              <h4 style="font-weight:700; margin-bottom: 4px;">جاموس أبيض نادر — محمد علي إبراهيم</h4>
+              <p style="font-size:0.85rem; color: var(--text-muted);">الوزن: ٤٩٠ كجم | السعر: ٣٦,٠٠٠ ج.م | المحافظة: الفيوم</p>
+              <p style="font-size:0.85rem; color: var(--text-muted); margin-top: 4px;">تاريخ الطلب: ٢٥ فبراير ٢٠٢٦</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="animal-btn" onclick="showToast('تمت الموافقة على العرض ✓')" style="background: var(--green);">موافقة ✓</button>
+              <button class="animal-btn" onclick="showToast('تم رفض العرض')" style="background: #ef4444;">رفض ✗</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+<script>
+function showTab(id) {
+  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tab = document.querySelector(`[data-panel="${id}"]`);
+  if (tab) tab.classList.add('active');
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+}
+</script>
+</body>
+</html>
