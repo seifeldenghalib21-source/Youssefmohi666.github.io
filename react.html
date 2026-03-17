@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>الجهة العامة للخدمات البيطرية — مصر</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{font-family:'Cairo',sans-serif;box-sizing:border-box}
+:root{
+  --bg:#0b1612;--surface:#111f14;--s2:#162b1a;--s3:#1c3422;
+  --bdr:rgba(255,255,255,.07);--bdr2:rgba(255,255,255,.12);
+  --tx:#e2e8f0;--mu:#64748b;--mu2:#94a3b8;
+  --g:#22c55e;--g2:#16a34a;--g3:#4ade80;
+  --gold:#f59e0b;--gold2:#fbbf24;
+  --card:rgba(255,255,255,.03);
+  --nav-bg:rgba(11,22,18,.93);
+  --foot-bg:#080f0b;
+}
+body{background:var(--bg);color:var(--tx);margin:0}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--g2);border-radius:10px}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes growUp{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 10px rgba(34,197,94,0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+.au{animation:fadeUp .5s ease both}
+.au1{animation:fadeUp .5s .08s ease both;opacity:0}
+.au2{animation:fadeUp .5s .16s ease both;opacity:0}
+.au3{animation:fadeUp .5s .24s ease both;opacity:0}
+.au4{animation:fadeUp .5s .32s ease both;opacity:0}
+.asc{animation:scaleIn .35s ease both}
+.afi{animation:fadeIn .35s ease both}
+.afloat{animation:float 3.5s ease-in-out infinite}
+.pg{animation:pageIn .45s ease both}
+.shake{animation:shake .35s ease}
+
+/* ── Glass ── */
+.glass{background:var(--card);border:1px solid var(--bdr);backdrop-filter:blur(12px);border-radius:18px}
+.glass2{background:rgba(255,255,255,.05);border:1px solid var(--bdr2);border-radius:14px}
+.ghov{transition:all .25s}
+.ghov:hover{background:rgba(255,255,255,.055);border-color:rgba(34,197,94,.25);transform:translateY(-3px);box-shadow:0 12px 36px rgba(34,197,94,.1)}
+
+/* ── Shimmer ── */
+.shimmer{background:linear-gradient(90deg,#22c55e,#86efac,#fbbf24,#22c55e);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:7px;font-weight:700;border-radius:11px;transition:all .2s;cursor:pointer;border:none;font-family:'Cairo',sans-serif;font-size:14px}
+.bg-btn{background:linear-gradient(135deg,var(--g2),var(--g));color:#fff;padding:10px 20px;box-shadow:0 4px 14px rgba(34,197,94,.2)}
+.bg-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,197,94,.35)}
+.out-btn{border:1.5px solid rgba(34,197,94,.4);color:var(--g3);background:transparent;padding:9px 18px}
+.out-btn:hover{background:rgba(34,197,94,.08);border-color:var(--g)}
+.gh-btn{background:rgba(255,255,255,.05);color:var(--mu2);padding:9px 16px}
+.gh-btn:hover{background:rgba(255,255,255,.1);color:var(--tx)}
+.sm-btn{padding:7px 14px;font-size:12px;border-radius:9px}
+.red-btn{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25);padding:8px 14px}
+.red-btn:hover{background:rgba(239,68,68,.22)}
+.gold-btn{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.25);padding:8px 14px}
+.gold-btn:hover{background:rgba(245,158,11,.2)}
+.blue-btn{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.25);padding:8px 14px}
+
+/* ── Input ── */
+.inp{width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1.5px solid var(--bdr2);border-radius:10px;font-size:14px;color:var(--tx);transition:border-color .2s,box-shadow .2s;font-family:'Cairo',sans-serif}
+.inp:focus{outline:none;border-color:rgba(34,197,94,.5);box-shadow:0 0 0 3px rgba(34,197,94,.08)}
+.inp::placeholder{color:var(--mu)}
+.inp option{background:#1a2e1f;color:var(--tx)}
+.inp-err{border-color:rgba(239,68,68,.5)!important}
+.inp-err:focus{box-shadow:0 0 0 3px rgba(239,68,68,.08)!important}
+
+/* ── Badge ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700}
+.bg{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+.bb{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
+.ba{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.25)}
+.br{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+.bpu{background:rgba(168,85,247,.12);color:#c084fc;border:1px solid rgba(168,85,247,.25)}
+.bgr{background:rgba(255,255,255,.06);color:var(--mu2);border:1px solid var(--bdr)}
+
+/* ── Nav ── */
+.nl{color:var(--mu2);font-weight:600;font-size:13px;padding:7px 12px;border-radius:9px;transition:all .2s;cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif}
+.nl:hover{color:var(--g3);background:rgba(34,197,94,.07)}
+.na{color:var(--g3);background:rgba(34,197,94,.1)}
+
+/* ── Sidebar ── */
+.sbi{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:10px;font-size:13px;font-weight:600;color:var(--mu2);cursor:pointer;transition:all .2s;border:none;background:none;width:100%;font-family:'Cairo',sans-serif;text-align:right}
+.sbi:hover{background:rgba(255,255,255,.05);color:var(--tx)}
+.sba{background:rgba(34,197,94,.12);color:var(--g3);border-right:3px solid var(--g)}
+
+/* ── Tab ── */
+.tab{padding:8px 16px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;border:none;background:transparent;font-family:'Cairo',sans-serif;color:var(--mu)}
+.tab:hover{color:var(--tx);background:rgba(255,255,255,.04)}
+.tba{background:var(--g2);color:#fff}
+
+/* ── Table ── */
+.tbl th{padding:11px 16px;text-align:right;font-size:11px;font-weight:700;color:var(--mu);background:rgba(255,255,255,.02);border-bottom:1px solid var(--bdr);white-space:nowrap;letter-spacing:.04em}
+.tbl td{padding:12px 16px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.tbl tr:hover td{background:rgba(34,197,94,.03)}
+.tbl tr:last-child td{border-bottom:none}
+
+/* ── Misc ── */
+.prog{height:5px;border-radius:50px;background:rgba(255,255,255,.07);overflow:hidden}
+.prog-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--g2),var(--g3));transition:width .9s ease}
+.upload-zone{border:2px dashed rgba(255,255,255,.12);border-radius:12px;padding:24px;text-align:center;transition:all .2s;cursor:pointer}
+.upload-zone:hover{border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.04)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease}
+.modal-box{background:#131f16;border:1px solid var(--bdr2);border-radius:20px;width:100%;max-width:640px;max-height:92vh;overflow-y:auto;animation:scaleIn .3s ease;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.sec-title{font-size:30px;font-weight:900;color:var(--g3)}
+.sec-sub{font-size:13px;color:var(--mu)}
+.divider{height:1px;background:var(--bdr);margin:16px 0}
+.chip{display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:var(--g3);padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700}
+.counter-ring{width:52px;height:52px;border-radius:50%;background:rgba(34,197,94,.1);border:2px solid var(--g2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:var(--g3);flex-shrink:0}
+.stat-card{background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(34,197,94,.03));border:1px solid rgba(34,197,94,.15);border-radius:16px;padding:20px}
+.hero-bg{background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(34,197,94,.15) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 80% 60%,rgba(245,158,11,.06) 0%,transparent 60%),var(--bg)}
+.clamp2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news-card-wrap:hover .news-img{transform:scale(1.04)}
+.news-img{width:100%;height:155px;display:flex;align-items:center;justify-content:center;font-size:56px;transition:transform .3s}
+
+/* ── Auth ── */
+.auth-card{background:rgba(255,255,255,.04);border:1px solid var(--bdr2);border-radius:20px;padding:36px 32px;width:100%;max-width:420px}
+.auth-shield{width:68px;height:68px;border-radius:20px;background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(22,163,74,.08));border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;animation:glow 3s infinite}
+
+/* ── Theme preview ── */
+.theme-swatch{width:28px;height:28px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:all .2s}
+.theme-swatch.active{border-color:var(--g3);transform:scale(1.2)}
+
+/* ── Toast ── */
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:600;padding:13px 24px;border-radius:14px;font-weight:700;font-size:14px;display:flex;gap:10px;align-items:center;animation:scaleIn .3s ease;white-space:nowrap}
+.toast-success{background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;box-shadow:0 8px 28px rgba(34,197,94,.4)}
+.toast-error{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;box-shadow:0 8px 28px rgba(239,68,68,.4)}
+
+/* ── Download btn ── */
+.dl-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.1);color:#60a5fa;border:1px solid rgba(59,130,246,.25);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Cairo',sans-serif}
+.dl-btn:hover{background:rgba(59,130,246,.2)}
+
+/* ── Grain overlay ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.35}
+
+/* ── Access Denied ── */
+.lock-anim{animation:bounce 2s ease-in-out infinite}
+
+/* ── Theme switching transitions ── */
+body,body *{transition:background-color .3s ease,color .3s ease,border-color .3s ease}
+body::before,svg,img,.btn,.tab,.badge,.sbi,.nl,.prog-fill,.shimmer{transition:none!important}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useRef,useContext,createContext,useCallback,useMemo}=React;
+
+/* ══════════════════════════════════════════════
+   SIMULATED DATABASE
+══════════════════════════════════════════════ */
+const ADMIN_DB=[
+  {id:'adm001',email:'admin@gvs-egypt.gov.eg',password:'Admin@2026',name:'مدير النظام الرئيسي',role:'admin',avatar:null}
+];
+
+/* ══════════════════════════════════════════════
+   THEME ENGINE
+══════════════════════════════════════════════ */
+const THEMES={
+  dark:{
+    id:'dark',name:'الوضع الداكن',emoji:'🌙',
+    preview:['#0b1612','#22c55e','#94a3b8'],
+    css:''
+  },
+  light:{
+    id:'light',name:'الوضع الفاتح',emoji:'☀️',
+    preview:['#ffffff','#16a34a','#111827'],
+    css:`
+      body{background:#f8fafc!important;color:#111827!important}
+      body::before{opacity:.06!important}
+      .hero-bg{background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 50%,#dcfce7 100%)!important}
+      .glass{background:#ffffff!important;border-color:#e5e7eb!important}
+      .glass2{background:#f9fafb!important;border-color:#e5e7eb!important}
+      .sec-title{color:#16a34a!important}
+      .sec-sub{color:#6b7280!important}
+      nav{background:rgba(255,255,255,.97)!important;border-bottom-color:#e5e7eb!important;box-shadow:0 1px 12px rgba(0,0,0,.06)!important}
+      .nl{color:#374151!important}.nl:hover{color:#16a34a!important;background:#f0fdf4!important}
+      .na{color:#16a34a!important;background:#f0fdf4!important}
+      footer{background:#f1f5f9!important;border-color:#e5e7eb!important}
+      .tbl th{background:#f9fafb!important;color:#6b7280!important;border-color:#e5e7eb!important}
+      .tbl td{color:#374151!important;border-color:#f3f4f6!important}
+      .tbl tr:hover td{background:#fafafa!important}
+      .inp{background:#fff!important;border-color:#e5e7eb!important;color:#111!important}
+      .inp::placeholder{color:#9ca3af!important}
+      .modal-box{background:#fff!important;border-color:#e5e7eb!important}
+      .upload-zone{border-color:#d1d5db!important}
+      .prog{background:#e5e7eb!important}
+      .tab{color:#6b7280!important}.tab:hover{background:#f0fdf4!important;color:#16a34a!important}
+      .sbi{color:#374151!important}.sbi:hover{background:#f0fdf4!important;color:#16a34a!important}
+      .sba{background:#dcfce7!important;color:#16a34a!important;border-color:#16a34a!important}
+      .gh-btn{background:#f3f4f6!important;color:#374151!important}
+      .gh-btn:hover{background:#e5e7eb!important}
+      .auth-card{background:#fff!important;border-color:#e5e7eb!important}
+      .chip{background:rgba(22,163,74,.08)!important;color:#16a34a!important}
+      .badge.bg{background:#dcfce7!important;color:#16a34a!important}
+      .badge.ba{background:#fef3c7!important;color:#d97706!important}
+      .badge.br{background:#fee2e2!important;color:#dc2626!important}
+      .badge.bb{background:#dbeafe!important;color:#1d4ed8!important}
+      .shimmer{background:linear-gradient(90deg,#16a34a,#15803d,#22c55e)!important;background-size:200% auto!important;-webkit-background-clip:text!important}
+    `
+  },
+  green:{
+    id:'green',name:'الوضع الأخضر',emoji:'🌿',
+    preview:['#14532d','#ffffff','#86efac'],
+    css:`
+      body{background:#14532d!important;color:#f0fdf4!important}
+      .hero-bg{background:radial-gradient(ellipse at 50% -10%,rgba(134,239,172,.25) 0%,transparent 60%),#14532d!important}
+      .glass{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.15)!important}
+      .glass2{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.12)!important}
+      .sec-title{color:#ffffff!important}
+      .sec-sub{color:#86efac!important}
+      nav{background:rgba(20,83,45,.95)!important;border-bottom-color:rgba(255,255,255,.1)!important}
+      .nl{color:#86efac!important}.nl:hover{color:#fff!important;background:rgba(255,255,255,.08)!important}
+      .na{color:#fff!important;background:rgba(255,255,255,.12)!important}
+      footer{background:#0a2d17!important;border-color:rgba(255,255,255,.08)!important}
+      .tbl th{background:rgba(255,255,255,.05)!important;color:#86efac!important;border-color:rgba(255,255,255,.1)!important}
+      .tbl td{color:#e2fae9!important;border-color:rgba(255,255,255,.06)!important}
+      .inp{background:rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.15)!important;color:#f0fdf4!important}
+      .modal-box{background:#166534!important;border-color:rgba(255,255,255,.15)!important}
+      .sbi{color:#86efac!important}.sbi:hover{background:rgba(255,255,255,.06)!important;color:#fff!important}
+      .sba{background:rgba(255,255,255,.12)!important;color:#fff!important}
+      .auth-card{background:rgba(255,255,255,.06)!important;border-color:rgba(255,255,255,.15)!important}
+      .shimmer{background:linear-gradient(90deg,#fff,#86efac,#fff)!important;background-size:200% auto!important;-webkit-background-clip:text!important}
+    `
+  }
+};
+
+/* ══════════════════════════════════════════════
+   INITIAL DATA
+══════════════════════════════════════════════ */
+const INIT_NEWS=[
+  {id:1,cat:'أخبار رسمية',title:'إطلاق منصة رقمية لتسهيل تعاملات موردي الثروة الحيوانية',
+   summary:'أعلنت الجهة عن إطلاق منصتها الرقمية المتكاملة لربط الموردين بالجهات الحكومية المختصة.',
+   body:'في خطوة نوعية نحو التحول الرقمي، أعلنت الجهة العامة للخدمات البيطرية عن إطلاق منصتها الرقمية. تتيح المنصة للموردين المعتمدين عرض حيواناتهم ومتابعة الطلبات والتواصل مع الجهات الحكومية بصورة إلكترونية سهلة وآمنة. وأكد الدكتور أحمد محمود أن هذه الخطوة تأتي في إطار رؤية مصر 2030 للتحول الرقمي وتطوير منظومة الثروة الحيوانية.',
+   date:'10 مارس 2026',author:'إدارة الإعلام',emoji:'🌐',color:'rgba(34,197,94,.08)',read:'4 دقائق',published:true},
+  {id:2,cat:'صحة حيوانية',title:'حملة تطعيم واسعة ضد الحمى القلاعية في 15 محافظة',
+   summary:'انطلقت حملة تطعيم شاملة تستهدف أكثر من 2 مليون رأس ماشية في أنحاء الجمهورية.',
+   body:'أطلقت الجهة العامة للخدمات البيطرية حملة تطعيم شاملة ضد مرض الحمى القلاعية تغطي 15 محافظة مصرية. تستهدف الحملة تطعيم ما يزيد على مليوني رأس ماشية من الأبقار والجاموس والأغنام والماعز. وأوضح الدكتور سامي علي أن الحملة تأتي في إطار خطة الدولة للقضاء على الأمراض المتوطنة.',
+   date:'5 مارس 2026',author:'د. سامي علي',emoji:'💉',color:'rgba(59,130,246,.08)',read:'3 دقائق',published:true},
+  {id:3,cat:'تعاون دولي',title:'توقيع بروتوكول تعاون مع منظمة الصحة الحيوانية العالمية',
+   summary:'وقّعت الجهة بروتوكول تعاون استراتيجي مع WOAH لتبادل الخبرات في الأمراض الحيوانية.',
+   body:'وقّعت الجهة العامة للخدمات البيطرية بروتوكول تعاون استراتيجي مع منظمة الصحة الحيوانية العالمية (WOAH). يهدف البروتوكول إلى تعزيز قدرات الرقابة البيطرية في مصر وتبادل الخبرات العلمية.',
+   date:'28 فبراير 2026',author:'قسم العلاقات الدولية',emoji:'🤝',color:'rgba(245,158,11,.08)',read:'5 دقائق',published:true},
+  {id:4,cat:'أبحاث',title:'نتائج مبشرة في دراسة تأثير التغذية على إنتاج الألبان',
+   summary:'كشفت دراسة حديثة عن رفع برامج التغذية المتكاملة لإنتاجية الألبان بنسبة 23%.',
+   body:'أعلن الفريق البحثي عن نتائج دراسة مدتها عامان حول تأثير برامج التغذية المتكاملة على إنتاج الألبان. أظهرت النتائج أن تطبيق البروتوكول الغذائي المقترح رفع متوسط إنتاج الجاموسة الحلوب بنسبة 23%.',
+   date:'15 فبراير 2026',author:'د. هدى حسن',emoji:'🔬',color:'rgba(168,85,247,.08)',read:'6 دقائق',published:true},
+  {id:5,cat:'إنجاز',title:'مصر تحقق خلو 12 محافظة من مرض الجلد العقدي',
+   summary:'أعلنت الجهة رسمياً خلو 12 محافظة من مرض الجلد العقدي بعد حملات مكثفة.',
+   body:'أعلنت الجهة العامة عن تحقيق خلو 12 محافظة مصرية من مرض الجلد العقدي (LSD). جاء هذا الإنجاز نتيجة حملات تطعيم مكثفة وبرامج رقابة صارمة نُفّذت خلال الفترة 2023–2025.',
+   date:'8 يناير 2026',author:'د. أحمد محمود',emoji:'🏆',color:'rgba(34,197,94,.08)',read:'4 دقائق',published:true},
+];
+
+const INIT_RESEARCH=[
+  {id:1,title:'دراسة الأمراض المعدية في الجاموس المصري وسبل الوقاية',year:2025,author:'د. أحمد محمود',cat:'أمراض معدية',pages:42,abstract:'تناولت هذه الدراسة الأمراض المعدية الشائعة في الجاموس المصري وأهم طرق الوقاية والعلاج.',downloadable:true},
+  {id:2,title:'تأثير التغذية على إنتاجية الألبان في أبقار الهولشتاين',year:2024,author:'د. سمر إبراهيم',cat:'تغذية حيوانية',pages:38,abstract:'دراسة تقييمية لأثر برامج التغذية المختلفة على معدلات إنتاج الألبان في أبقار الهولشتاين بمصر.',downloadable:true},
+  {id:3,title:'برامج التحصين الحديثة للثروة الحيوانية في الريف المصري',year:2024,author:'فريق البحث البيطري',cat:'تحصينات',pages:55,abstract:'دليل شامل لأحدث برامج التحصين الموصى بها للحيوانات المزرعية في البيئات الريفية المصرية.',downloadable:true},
+  {id:4,title:'تقييم الحالة الصحية لقطعان الجاموس في محافظة الجيزة',year:2023,author:'د. محمد علي',cat:'صحة الحيوان',pages:30,abstract:'مسح ميداني شامل لتقييم الحالة الصحية العامة لقطعان الجاموس في مختلف مناطق محافظة الجيزة.',downloadable:false},
+  {id:5,title:'الكشف المبكر عن التهاب الضرع باستخدام الذكاء الاصطناعي',year:2025,author:'د. أحمد محمود',cat:'تكنولوجيا بيطرية',pages:47,abstract:'دراسة بحثية حول تطبيق تقنيات الذكاء الاصطناعي في التشخيص المبكر لأمراض الضرع في الأبقار.',downloadable:true},
+];
+
+const ANIMALS_12=[
+  {id:'C-001',name:'بقرة حلوب هولشتاين',type:'بقر',age:'3 سنوات',weight:'480 كجم',gender:'أنثى',health:'ممتاز',vaccine:true,supplier:'مزرعة النيل - القليوبية',price:38000,tag:'مميز'},
+  {id:'C-002',name:'بقرة تربية محلية (بلدي)',type:'بقر',age:'5 سنوات',weight:'360 كجم',gender:'أنثى',health:'جيد',vaccine:true,supplier:'علي حسن - المنوفية',price:22000,tag:null},
+  {id:'B-001',name:'جاموسة حلوب عالية الإنتاج',type:'جاموس',age:'4 سنوات',weight:'520 كجم',gender:'أنثى',health:'ممتاز',vaccine:true,supplier:'محمد عبدالله - الجيزة',price:45000,tag:'مميز'},
+  {id:'B-002',name:'جاموسة تسمين',type:'جاموس',age:'2 سنوات',weight:'590 كجم',gender:'أنثى',health:'جيد',vaccine:true,supplier:'خالد محمود - الفيوم',price:52000,tag:null},
+  {id:'B-003',name:'عجل جاموسي (3–6 أشهر)',type:'جاموس',age:'5 أشهر',weight:'120 كجم',gender:'ذكر',health:'ممتاز',vaccine:false,supplier:'أحمد سالم - الدقهلية',price:11000,tag:'جديد'},
+  {id:'B-004',name:'عجل جاموسي (6–12 شهراً)',type:'جاموس',age:'9 أشهر',weight:'200 كجم',gender:'ذكر',health:'جيد',vaccine:true,supplier:'مزرعة الدلتا - كفر الشيخ',price:16000,tag:null},
+  {id:'B-005',name:'جاموس بالغ (ذكر)',type:'جاموس',age:'4 سنوات',weight:'680 كجم',gender:'ذكر',health:'ممتاز',vaccine:true,supplier:'محمد عبدالله - الجيزة',price:65000,tag:'مميز'},
+  {id:'B-006',name:'جاموسة حامل',type:'جاموس',age:'3 سنوات',weight:'490 كجم',gender:'أنثى',health:'جيد',vaccine:true,supplier:'علي حسن - المنوفية',price:58000,tag:'حامل'},
+  {id:'B-007',name:'جاموسة مرضعة',type:'جاموس',age:'4 سنوات',weight:'480 كجم',gender:'أنثى',health:'ممتاز',vaccine:true,supplier:'خالد محمود - الفيوم',price:55000,tag:null},
+  {id:'B-008',name:'جاموسة صغيرة (أقل من سنة)',type:'جاموس',age:'8 أشهر',weight:'160 كجم',gender:'أنثى',health:'جيد',vaccine:false,supplier:'أحمد سالم - الدقهلية',price:18000,tag:'جديد'},
+  {id:'B-009',name:'جاموس تسمين (مجموعة)',type:'جاموس',age:'2 سنوات',weight:'550 كجم',gender:'مختلط',health:'ممتاز',vaccine:true,supplier:'مزرعة النيل - القليوبية',price:85000,tag:'عرض خاص'},
+  {id:'B-010',name:'جاموسة إنتاج مزدوج (لبن+لحم)',type:'جاموس',age:'3 سنوات',weight:'510 كجم',gender:'أنثى',health:'ممتاز',vaccine:true,supplier:'مزرعة الدلتا - كفر الشيخ',price:62000,tag:'مميز'},
+];
+
+const CATS=[
+  {id:'buffalo',name:'الجاموس المصري',emoji:'🐃',count:195,desc:'جاموس حلوب وتسمين أصيل',color:'#3b82f6',bg:'rgba(59,130,246,.1)',subTypes:['جاموسة حلوب','جاموس تسمين','عجل جاموسي','جاموسة حامل','جاموسة مرضعة']},
+  {id:'cow',name:'الأبقار',emoji:'🐄',count:52,desc:'أبقار هولشتاين وبلدي حلوب',color:'#22c55e',bg:'rgba(34,197,94,.1)',subTypes:['بقرة هولشتاين','بقرة بلدي','عجل بقري','بقرة حلوب']},
+  {id:'calf',name:'العجول',emoji:'🐂',count:38,desc:'عجول حديثة الولادة وصغار',color:'#f59e0b',bg:'rgba(245,158,11,.1)',subTypes:['عجل جاموسي صغير','عجل بقري صغير','عجل حديث الولادة']},
+  {id:'sheep',name:'الأغنام والماعز',emoji:'🐑',count:24,desc:'أغنام بلدي وماعز محلي',color:'#a855f7',bg:'rgba(168,85,247,.1)',subTypes:['خروف بلدي','ماعز محلي','نعجة حلوب']},
+];
+
+const USER_DATA={name:'محمد عبدالله أحمد',email:'mohammed@gvs-egypt.gov.eg',phone:'0100-123-4567',national_id:'28501012345678',address:'12 شارع النيل، الدقي، الجيزة',governorate:'الجيزة',farm_name:'مزرعة النيل',farm_size:'15',experience:'12 سنة',role:'مورد معتمد',joined:'يناير 2024',avatar:null,animal_types:['أبقار','جاموس'],bio:'مورد معتمد متخصص في تربية الجاموس والأبقار.'};
+
+/* ══════════════════════════════════════════════
+   CONTEXTS
+══════════════════════════════════════════════ */
+const AuthContext=createContext();
+const ThemeContext=createContext();
+const DataContext=createContext();
+const ToastContext=createContext();
+
+/* AUTH PROVIDER */
+const AuthProvider=({children})=>{
+  const [authUser,setAuthUser]=useState(()=>{
+    try{const s=sessionStorage.getItem('gvs_auth');return s?JSON.parse(s):null}catch{return null}
+  });
+  const login=(email,pw)=>{
+    const found=ADMIN_DB.find(a=>a.email.toLowerCase()===email.toLowerCase()&&a.password===pw);
+    if(found){const{password:_,...safe}=found;sessionStorage.setItem('gvs_auth',JSON.stringify(safe));setAuthUser(safe);return{success:true}}
+    return{success:false,error:'البريد الإلكتروني أو كلمة المرور غير صحيحة'}
+  };
+  const logout=()=>{sessionStorage.removeItem('gvs_auth');setAuthUser(null)};
+  return(
+    <AuthContext.Provider value={{authUser,login,logout,isAdmin:authUser?.role==='admin',isLoggedIn:!!authUser}}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+/* THEME PROVIDER */
+const ThemeProvider=({children})=>{
+  const [theme,setThemeState]=useState(()=>localStorage.getItem('gvs_theme')||'dark');
+  const setTheme=t=>{setThemeState(t);localStorage.setItem('gvs_theme',t)};
+  useEffect(()=>{
+    let el=document.getElementById('gvs-theme-css');
+    if(!el){el=document.createElement('style');el.id='gvs-theme-css';document.head.appendChild(el)}
+    el.textContent=THEMES[theme]?.css||'';
+    document.body.setAttribute('data-theme',theme);
+  },[theme]);
+  return <ThemeContext.Provider value={{theme,setTheme}}>{children}</ThemeContext.Provider>;
+};
+
+/* DATA PROVIDER */
+const DataProvider=({children})=>{
+  const [news,setNews]=useState(INIT_NEWS);
+  const [research,setResearch]=useState(INIT_RESEARCH);
+  const addNews=item=>setNews(p=>[{...item,id:Date.now()},...p]);
+  const updateNews=(id,item)=>setNews(p=>p.map(n=>n.id===id?{...item,id}:n));
+  const deleteNews=id=>setNews(p=>p.filter(n=>n.id!==id));
+  const addResearch=item=>setResearch(p=>[{...item,id:Date.now()},...p]);
+  const updateResearch=(id,item)=>setResearch(p=>p.map(r=>r.id===id?{...item,id}:r));
+  const deleteResearch=id=>setResearch(p=>p.filter(r=>r.id!==id));
+  return(
+    <DataContext.Provider value={{news,addNews,updateNews,deleteNews,research,addResearch,updateResearch,deleteResearch}}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+/* TOAST PROVIDER */
+const ToastProvider=({children})=>{
+  const [toast,setToast]=useState(null);
+  const showToast=(msg,type='success')=>{
+    setToast({msg,type});
+    setTimeout(()=>setToast(null),3000);
+  };
+  return(
+    <ToastContext.Provider value={showToast}>
+      {children}
+      {toast&&(
+        <div className={`toast toast-${toast.type} au`}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d={toast.type==='success'?"M20 6L9 17l-5-5":"M18 6L6 18M6 6l12 12"}/></svg>
+          {toast.msg}
+        </div>
+      )}
+    </ToastContext.Provider>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   ICONS
+══════════════════════════════════════════════ */
+const Ico=({d,s=18,c=''})=>(
+  <svg xmlns="http://www.w3.org/2000/svg" width={s} height={s} viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    className={c} style={{flexShrink:0}}>
+    {Array.isArray(d)?d.map((p,i)=><path key={i} d={p}/>):<path d={d}/>}
+  </svg>
+);
+const I={
+  home:"M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z",
+  news:"M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2",
+  cat:"M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z",
+  user:"M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z",
+  admin:"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  about:["M12 22c10 0 10-20 0-20S2 12 12 22","M2 12h20"],
+  contact:"M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 010 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16z",
+  min:"M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z",
+  res:"M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z",
+  sup:"M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8 4 4 0 000-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75",
+  menu:"M3 12h18M3 6h18M3 18h18",
+  x:"M18 6L6 18M6 6l12 12",
+  check:"M20 6L9 17l-5-5",
+  plus:"M12 5v14M5 12h14",
+  edit:"M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z",
+  trash:"M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6",
+  cam:"M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2zM12 17a4 4 0 100-8 4 4 0 000 8z",
+  up:"M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12",
+  eye:"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zM12 9a3 3 0 100 6 3 3 0 000-6z",
+  eyeoff:["M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M1 1l22 22"],
+  arr:"M5 12h14M12 5l7 7-7 7",
+  arrL:"M19 12H5M12 19l-7-7 7-7",
+  shield:"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  star:"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+  map:"M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0zM12 7v3M12 13h.01",
+  save:"M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2zM17 21v-8H7v8M7 3v5h8",
+  mail:"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zM22 6l-10 7L2 6",
+  phone:"M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 010 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16z",
+  bell:"M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0",
+  logout:"M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9",
+  chart:"M18 20V10M12 20V4M6 20v-6",
+  search:"M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0",
+  cal:"M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM16 1v4M8 1v4M3 9h18",
+  doc:"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8",
+  img:"M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2zM8.5 10a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM21 15l-5-5L5 21",
+  cert:"M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M9 13l2 2 4-4",
+  award:"M12 15a7 7 0 100-14 7 7 0 000 14zM8.21 13.89L7 23l5-3 5 3-1.21-9.12",
+  tag:"M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z",
+  info:"M12 22a10 10 0 100-20 10 10 0 000 20zM12 8h.01M11 12h1v4h1",
+  filter:"M22 3H2l8 9.46V19l4 2v-8.54L22 3z",
+  cow:"M4.5 9.5A4.5 4.5 0 019 5h6a4.5 4.5 0 014.5 4.5V15a4.5 4.5 0 01-4.5 4.5H9A4.5 4.5 0 014.5 15V9.5z",
+  lock:"M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2zM7 11V7a5 5 0 0110 0v4",
+  key:"M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4",
+  palette:"M12 22a9.97 9.97 0 01-7.071-2.929A10 10 0 0112 2a9.95 9.95 0 017 2.805V5a5 5 0 00-5 5H9a5 5 0 000 10c.47 0 .923-.065 1.354-.187C11.054 21.93 11.522 22 12 22z",
+  dl:"M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3",
+  globe:"M12 22a10 10 0 100-20 10 10 0 000 20zM2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z",
+  toggle:["M21 10H3","M21 6H3","M21 14H3","M21 18H3"],
+  pubsub:["M18 8h1a4 4 0 010 8h-1","M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"],
+};
+
+/* ══════════════════════════════════════════════
+   REUSABLE COMPONENTS
+══════════════════════════════════════════════ */
+const Label=({s})=><label style={{fontSize:12,color:'#94a3b8',display:'block',marginBottom:5}}>{s}</label>;
+const FieldRow=({children,cols=2})=><div style={{display:'grid',gridTemplateColumns:`repeat(${cols},1fr)`,gap:14}}>{children}</div>;
+const Divider=()=><div className="divider"/>;
+
+/* Modal wrapper */
+const Modal=({title,onClose,children,footer,maxW=640})=>(
+  <div className="modal-bg" onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+    <div className="modal-box" style={{maxWidth:maxW}}>
+      <div style={{padding:'18px 24px',borderBottom:'1px solid rgba(255,255,255,.08)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <h2 style={{fontWeight:900,fontSize:16,color:'#4ade80'}}>{title}</h2>
+        <button onClick={onClose} style={{border:'none',background:'none',cursor:'pointer',padding:6,borderRadius:8}}><Ico d={I.x} s={18} c="text-gray-400"/></button>
+      </div>
+      <div style={{padding:'20px 24px',display:'flex',flexDirection:'column',gap:14}}>{children}</div>
+      {footer&&<div style={{padding:'14px 24px',borderTop:'1px solid rgba(255,255,255,.07)',display:'flex',gap:8,justifyContent:'flex-end'}}>{footer}</div>}
+    </div>
+  </div>
+);
+
+/* Delete confirm */
+const DeleteConfirm=({onClose,onConfirm,label='هذا العنصر'})=>(
+  <Modal title="تأكيد الحذف" onClose={onClose} maxW={380}
+    footer={<><button className="btn gh-btn" onClick={onClose}>إلغاء</button><button className="btn red-btn" onClick={onConfirm}><Ico d={I.trash} s={14}/>نعم، احذف</button></>}>
+    <div style={{textAlign:'center',padding:'10px 0'}}>
+      <div style={{width:52,height:52,borderRadius:'50%',background:'rgba(239,68,68,.12)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 14px'}}><Ico d={I.trash} s={22} c="text-red-400"/></div>
+      <p style={{fontSize:13,color:'#94a3b8'}}>هل أنت متأكد من حذف {label}؟ لا يمكن التراجع.</p>
+    </div>
+  </Modal>
+);
+
+/* ══════════════════════════════════════════════
+   AUTH COMPONENTS
+══════════════════════════════════════════════ */
+/* Login Page */
+const LoginPage=({setPage,redirect})=>{
+  const {login,isLoggedIn,isAdmin}=useContext(AuthContext);
+  const showToast=useContext(ToastContext);
+  const [email,setEmail]=useState('');
+  const [pw,setPw]=useState('');
+  const [showPw,setShowPw]=useState(false);
+  const [loading,setLoading]=useState(false);
+  const [err,setErr]=useState('');
+  const [attempts,setAttempts]=useState(0);
+  const [shakeKey,setShakeKey]=useState(0);
+
+  useEffect(()=>{if(isLoggedIn&&isAdmin)setPage('admin')},[isLoggedIn]);
+
+  const handleLogin=async()=>{
+    if(!email||!pw){setErr('يرجى إدخال البريد الإلكتروني وكلمة المرور');return}
+    if(attempts>=5){setErr('تم تجاوز الحد الأقصى للمحاولات. يرجى المحاولة لاحقاً.');return}
+    setLoading(true);setErr('');
+    await new Promise(r=>setTimeout(r,900));
+    const res=login(email,pw);
+    setLoading(false);
+    if(res.success){showToast('تم تسجيل الدخول بنجاح! 🎉');setTimeout(()=>setPage('admin'),400)}
+    else{setErr(res.error);setAttempts(a=>a+1);setShakeKey(k=>k+1)}
+  };
+
+  const handleKey=e=>{if(e.key==='Enter')handleLogin()};
+
+  return(
+    <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px',background:'radial-gradient(ellipse at 50% -10%,rgba(34,197,94,.12) 0%,transparent 60%),var(--bg)'}}>
+      <div className="auth-card asc">
+        {/* Header */}
+        <div style={{textAlign:'center',marginBottom:28}}>
+          <div className="auth-shield">
+            <Ico d={I.lock} s={28} c="text-green-400"/>
+          </div>
+          <h1 style={{fontSize:24,fontWeight:900,color:'#f1f5f9',marginBottom:6}}>تسجيل دخول الإدارة</h1>
+          <p style={{fontSize:13,color:'#64748b'}}>منطقة محمية — المسؤولون المعتمدون فقط</p>
+        </div>
+
+        {/* Form */}
+        <div key={shakeKey} className={err?'shake':''} style={{display:'flex',flexDirection:'column',gap:14}}>
+          <div>
+            <Label s="البريد الإلكتروني"/>
+            <div style={{position:'relative'}}>
+              <Ico d={I.mail} s={15} c="" style={{position:'absolute',right:12,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+              <input value={email} onChange={e=>{setEmail(e.target.value);setErr('')}} onKeyDown={handleKey}
+                className={`inp ${err?'inp-err':''}`} placeholder="admin@gvs-egypt.gov.eg" dir="ltr"
+                style={{paddingRight:38,paddingLeft:14}}/>
+            </div>
+          </div>
+          <div>
+            <Label s="كلمة المرور"/>
+            <div style={{position:'relative'}}>
+              <Ico d={I.lock} s={15} c="" style={{position:'absolute',right:12,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+              <input type={showPw?'text':'password'} value={pw} onChange={e=>{setPw(e.target.value);setErr('')}} onKeyDown={handleKey}
+                className={`inp ${err?'inp-err':''}`} placeholder="كلمة المرور" dir="ltr"
+                style={{paddingRight:38,paddingLeft:40}}/>
+              <button onClick={()=>setShowPw(v=>!v)} style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',border:'none',background:'none',cursor:'pointer',padding:2}}>
+                <Ico d={showPw?I.eyeoff:I.eye} s={15} c="text-gray-500"/>
+              </button>
+            </div>
+          </div>
+
+          {err&&(
+            <div style={{background:'rgba(239,68,68,.1)',border:'1px solid rgba(239,68,68,.25)',borderRadius:10,padding:'10px 14px',display:'flex',gap:8,alignItems:'center'}}>
+              <Ico d={I.info} s={15} c="text-red-400" style={{flexShrink:0}}/>
+              <span style={{fontSize:13,color:'#f87171'}}>{err}</span>
+            </div>
+          )}
+
+          {attempts>2&&attempts<5&&(
+            <div style={{background:'rgba(245,158,11,.08)',border:'1px solid rgba(245,158,11,.2)',borderRadius:10,padding:'9px 14px',fontSize:12,color:'#fbbf24'}}>
+              ⚠️ تبقى {5-attempts} محاولات قبل قفل الوصول المؤقت
+            </div>
+          )}
+
+          <button className="btn bg-btn" style={{width:'100%',justifyContent:'center',fontSize:15,padding:'13px 0',marginTop:6}} onClick={handleLogin} disabled={loading}>
+            {loading?(
+              <><svg style={{animation:'spin 1s linear infinite'}} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" opacity=".3"/><path d="M12 3a9 9 0 019 9"/></svg>جارٍ التحقق...</>
+            ):<><Ico d={I.key} s={16}/>دخول لوحة التحكم</>}
+          </button>
+        </div>
+
+        <Divider/>
+        <div style={{display:'flex',gap:8,alignItems:'center',justifyContent:'center'}}>
+          <button className="btn gh-btn btn-sm" onClick={()=>setPage('home')} style={{justifyContent:'center'}}><Ico d={I.arrL} s={13}/>العودة للموقع</button>
+        </div>
+
+        {/* Security note */}
+        <div style={{marginTop:20,padding:'12px 14px',background:'rgba(34,197,94,.05)',border:'1px solid rgba(34,197,94,.12)',borderRadius:10,display:'flex',gap:8,alignItems:'flex-start'}}>
+          <Ico d={I.shield} s={14} c="text-green-500" style={{marginTop:1,flexShrink:0}}/>
+          <p style={{fontSize:11,color:'#64748b',lineHeight:1.7}}>جميع محاولات الدخول مسجّلة ومراقبة. الوصول غير المصرح به مخالف للقانون.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* Access Denied */
+const AccessDeniedPage=({setPage})=>(
+  <div style={{minHeight:'70vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
+    <div style={{textAlign:'center',maxWidth:420}} className="asc">
+      <div style={{fontSize:80,marginBottom:20}} className="lock-anim">🔒</div>
+      <h1 style={{fontSize:28,fontWeight:900,color:'#f87171',marginBottom:10}}>وصول مرفوض</h1>
+      <p style={{fontSize:14,color:'#94a3b8',lineHeight:1.8,marginBottom:24}}>ليس لديك صلاحية للوصول إلى هذه المنطقة. هذه الصفحة محجوزة للمسؤولين المعتمدين فقط.</p>
+      <div style={{display:'flex',gap:10,justifyContent:'center'}}>
+        <button className="btn bg-btn" onClick={()=>setPage('login')}><Ico d={I.key} s={15}/>تسجيل الدخول</button>
+        <button className="btn out-btn" onClick={()=>setPage('home')}><Ico d={I.home} s={15}/>الرئيسية</button>
+      </div>
+    </div>
+  </div>
+);
+
+/* Protected Route wrapper */
+const ProtectedRoute=({children,requireAdmin=false,setPage})=>{
+  const {isLoggedIn,isAdmin}=useContext(AuthContext);
+  if(!isLoggedIn)return <LoginPage setPage={setPage}/>;
+  if(requireAdmin&&!isAdmin)return <AccessDeniedPage setPage={setPage}/>;
+  return children;
+};
+
+/* ══════════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════════ */
+const NAV=[
+  {id:'home',l:'الرئيسية',ic:I.home},
+  {id:'news',l:'الأخبار',ic:I.news},
+  {id:'animals',l:'الحيوانات',ic:I.cat},
+  {id:'about',l:'من نحن',ic:I.about},
+  {id:'minister',l:'كلمة الوزير',ic:I.min},
+  {id:'research',l:'البحوث',ic:I.res},
+  {id:'contact',l:'تواصل معنا',ic:I.contact},
+];
+
+const Navbar=({page,setPage,user})=>{
+  const {authUser,logout,isAdmin}=useContext(AuthContext);
+  const {theme}=useContext(ThemeContext);
+  const [open,setOpen]=useState(false);
+
+  const handleLogout=()=>{logout();setPage('home')};
+
+  return(
+    <nav style={{background:'rgba(11,22,18,.93)',backdropFilter:'blur(20px)',borderBottom:'1px solid rgba(255,255,255,.06)',position:'sticky',top:0,zIndex:50}}>
+      <div style={{maxWidth:1240,margin:'0 auto',padding:'0 20px',display:'flex',alignItems:'center',justifyContent:'space-between',height:62}}>
+        <button onClick={()=>setPage('home')} className="btn" style={{background:'none',padding:0,gap:10}}>
+          <div style={{width:36,height:36,borderRadius:10,background:'linear-gradient(135deg,#16a34a,#22c55e)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 3px 12px rgba(34,197,94,.3)'}}>
+            <Ico d={I.cow} s={17} c="text-white"/>
+          </div>
+          <div style={{textAlign:'right'}}>
+            <div style={{fontWeight:900,fontSize:12,color:'#fff',lineHeight:1.2}}>الجهة العامة</div>
+            <div style={{fontWeight:700,fontSize:10,color:'#4ade80',lineHeight:1.2}}>للخدمات البيطرية</div>
+          </div>
+        </button>
+
+        <div className="hidden md:flex" style={{gap:2,alignItems:'center'}}>
+          {NAV.map(n=>(
+            <button key={n.id} onClick={()=>setPage(n.id)}
+              className={`nl ${(page===n.id||page.startsWith(n.id+'-'))?'na':''}`}>{n.l}</button>
+          ))}
+        </div>
+
+        <div style={{display:'flex',gap:8,alignItems:'center'}}>
+          {isAdmin&&(
+            <button onClick={()=>setPage('admin')}
+              className={`btn sm-btn ${page==='admin'?'bg-btn':'out-btn'} hidden md:flex`}>
+              <Ico d={I.admin} s={13}/>لوحة التحكم
+            </button>
+          )}
+          {!authUser&&(
+            <button onClick={()=>setPage('login')} className="btn gh-btn sm-btn hidden md:flex">
+              <Ico d={I.lock} s={13}/>دخول الإدارة
+            </button>
+          )}
+
+          {/* User avatar */}
+          <div style={{position:'relative'}}>
+            <button onClick={()=>setPage('profile')}
+              style={{width:34,height:34,borderRadius:'50%',background:'linear-gradient(135deg,#16a34a,#4ade80)',display:'flex',alignItems:'center',justifyContent:'center',border:'2px solid rgba(34,197,94,.3)',cursor:'pointer',overflow:'hidden',boxShadow:authUser?'0 0 0 3px rgba(34,197,94,.2)':'none'}}>
+              {user.avatar?<img src={user.avatar} style={{width:'100%',height:'100%',objectFit:'cover'}} alt=""/>
+                :<span style={{color:'#fff',fontWeight:900,fontSize:13}}>{user.name[0]}</span>}
+            </button>
+            {authUser&&<div style={{position:'absolute',bottom:0,right:0,width:10,height:10,borderRadius:'50%',background:'#22c55e',border:'2px solid var(--bg)'}}/>}
+          </div>
+
+          {authUser&&(
+            <button onClick={handleLogout} className="btn gh-btn btn-sm hidden md:flex" style={{fontSize:11}}>
+              <Ico d={I.logout} s={12}/>خروج
+            </button>
+          )}
+
+          <button onClick={()=>setOpen(v=>!v)} className="md:hidden" style={{border:'none',background:'none',cursor:'pointer',padding:4}}>
+            <Ico d={open?I.x:I.menu} s={22} c="text-gray-300"/>
+          </button>
+        </div>
+      </div>
+
+      {open&&(
+        <div style={{borderTop:'1px solid rgba(255,255,255,.06)',padding:'12px 16px',background:'rgba(11,22,18,.98)'}} className="au">
+          {NAV.map(n=>(
+            <button key={n.id} onClick={()=>{setPage(n.id);setOpen(false)}}
+              className={`nl ${page===n.id?'na':''}`}
+              style={{display:'block',width:'100%',textAlign:'right',marginBottom:2}}>
+              {n.l}
+            </button>
+          ))}
+          <div className="divider"/>
+          <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+            {isAdmin&&<button className="btn bg-btn sm-btn" onClick={()=>{setPage('admin');setOpen(false)}}>لوحة التحكم</button>}
+            {!authUser&&<button className="btn out-btn sm-btn" onClick={()=>{setPage('login');setOpen(false)}}><Ico d={I.lock} s={12}/>دخول الإدارة</button>}
+            {authUser&&<button className="btn gh-btn sm-btn" onClick={()=>{handleLogout();setOpen(false)}}><Ico d={I.logout} s={12}/>خروج</button>}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   ANIMAL CARD
+══════════════════════════════════════════════ */
+const EM={'بقر':'🐄','جاموس':'🐃'};
+const TCL={'مميز':'bg','جديد':'bb','حامل':'ba','عرض خاص':'ba'};
+
+const AnimalCard=({a})=>{
+  const [off,setOff]=useState(false);
+  return(
+    <div className="glass ghov" style={{overflow:'hidden'}}>
+      <div style={{height:148,display:'flex',alignItems:'center',justifyContent:'center',background:'linear-gradient(135deg,rgba(34,197,94,.06),rgba(22,163,74,.1))',position:'relative'}}>
+        <span className="afloat" style={{fontSize:62}}>{EM[a.type]||'🐮'}</span>
+        <div style={{position:'absolute',top:10,right:10,display:'flex',gap:4}}>
+          {a.tag&&<span className={`badge ${TCL[a.tag]||'bg'}`}>{a.tag}</span>}
+          <span className={`badge ${a.type==='جاموس'?'bb':'bg'}`}>{a.type}</span>
+        </div>
+        {a.vaccine&&<div style={{position:'absolute',bottom:7,left:9}}><span className="badge bg"><Ico d={I.shield} s={10}/>محصّن</span></div>}
+      </div>
+      <div style={{padding:'15px 17px'}}>
+        <div style={{fontWeight:800,fontSize:13,color:'#f1f5f9',marginBottom:3,lineHeight:1.4}}>{a.name}</div>
+        <div style={{fontSize:11,color:'#64748b',marginBottom:11}}>{a.supplier}</div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:5,marginBottom:12}}>
+          {[['العمر',a.age],['الوزن',a.weight],['الجنس',a.gender],['الصحة',a.health]].map(([k,v])=>(
+            <div key={k} style={{background:'rgba(255,255,255,.03)',borderRadius:8,padding:'6px 9px',textAlign:'center'}}>
+              <div style={{fontSize:9,color:'#64748b'}}>{k}</div>
+              <div style={{fontSize:11,fontWeight:700,color:'#e2e8f0',marginTop:1}}>{v}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:11}}>
+          <div>
+            <div style={{fontSize:10,color:'#64748b'}}>السعر</div>
+            <div style={{fontSize:17,fontWeight:900,color:'#4ade80'}}>{a.price.toLocaleString('ar-EG')}<span style={{fontSize:10,color:'#64748b',marginRight:2}}>ج.م</span></div>
+          </div>
+        </div>
+        <button onClick={()=>setOff(v=>!v)} className={`btn ${off?'out-btn':'bg-btn'}`} style={{width:'100%',justifyContent:'center',fontSize:13}}>
+          <Ico d={off?I.check:I.tag} s={13}/>{off?'تم تقديم العرض':'تقديم عرض'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   NEWS CARD
+══════════════════════════════════════════════ */
+const NewsCard=({n,setPage})=>(
+  <div className="glass ghov news-card-wrap" style={{overflow:'hidden',cursor:'pointer'}} onClick={()=>setPage('news-'+n.id)}>
+    <div className="news-img" style={{background:n.color}}>{n.emoji}</div>
+    <div style={{padding:'15px 17px'}}>
+      <div style={{display:'flex',gap:7,marginBottom:7,alignItems:'center'}}>
+        <span className="badge bg" style={{fontSize:10}}>{n.cat}</span>
+        <span style={{fontSize:10,color:'#64748b'}}>{n.date}</span>
+      </div>
+      <h3 style={{fontWeight:800,fontSize:13,color:'#f1f5f9',lineHeight:1.5,marginBottom:7}} className="clamp2">{n.title}</h3>
+      <p style={{fontSize:12,color:'#94a3b8',lineHeight:1.7,marginBottom:11}} className="clamp2">{n.summary}</p>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <span style={{fontSize:11,color:'#64748b'}}>{n.read} للقراءة</span>
+        <button className="btn gh-btn sm-btn">اقرأ المزيد<Ico d={I.arr} s={11}/></button>
+      </div>
+    </div>
+  </div>
+);
+
+/* ══════════════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════════════ */
+const HomePage=({setPage})=>{
+  const {news}=useContext(DataContext);
+  const pubNews=news.filter(n=>n.published).slice(0,3);
+  const stats=[
+    {v:'247+',l:'حيوان مسجل',ic:I.cow},{v:'38',l:'مورد معتمد',ic:I.sup},
+    {v:'15',l:'محافظة مغطاة',ic:I.map},{v:'92+',l:'بحث منشور',ic:I.res},
+  ];
+  return(
+    <div>
+      <section className="hero-bg" style={{minHeight:'92vh',display:'flex',alignItems:'center',justifyContent:'center',padding:'60px 20px',position:'relative',overflow:'hidden'}}>
+        <div style={{position:'absolute',top:'25%',right:'20%',width:400,height:400,borderRadius:'50%',background:'rgba(34,197,94,.04)',filter:'blur(80px)',pointerEvents:'none'}}/>
+        <div style={{maxWidth:860,margin:'0 auto',textAlign:'center',position:'relative',zIndex:1}}>
+          <div className="chip au" style={{marginBottom:24,display:'inline-flex'}}>
+            <span style={{width:7,height:7,borderRadius:'50%',background:'#4ade80',animation:'pulse 2s infinite'}}/>
+            المنصة الرسمية للجهة العامة للخدمات البيطرية
+          </div>
+          <h1 className="au1" style={{fontSize:60,fontWeight:900,color:'#fff',marginBottom:16,lineHeight:1.2}}>
+            منصة <span className="shimmer">تداول الثروة</span><br/>الحيوانية في مصر
+          </h1>
+          <p className="au2" style={{fontSize:16,color:'#94a3b8',maxWidth:560,margin:'0 auto 34px',lineHeight:1.9}}>
+            منصة رقمية متكاملة تربط موردي الأبقار والجاموس بالجهات الحكومية المصرية بأعلى معايير الجودة والشفافية
+          </p>
+          <div className="au3" style={{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap'}}>
+            <button className="btn bg-btn" style={{fontSize:15,padding:'13px 28px'}} onClick={()=>setPage('animals')}><Ico d={I.cat} s={17}/>تصفح الحيوانات<Ico d={I.arr} s={15}/></button>
+            <button className="btn out-btn" style={{fontSize:15,padding:'13px 28px'}} onClick={()=>setPage('supplier-register')}><Ico d={I.sup} s={17}/>سجّل كمورد</button>
+          </div>
+          <div className="au4" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(170px,1fr))',gap:14,marginTop:58}}>
+            {stats.map((s,i)=>(
+              <div key={i} className="glass" style={{padding:'18px',textAlign:'center'}}>
+                <div style={{width:38,height:38,borderRadius:12,background:'rgba(34,197,94,.12)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 10px'}}><Ico d={s.ic} s={17} c="text-green-400"/></div>
+                <div style={{fontSize:26,fontWeight:900,color:'#fff'}}>{s.v}</div>
+                <div style={{fontSize:12,color:'#64748b',marginTop:2}}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{maxWidth:1100,margin:'0 auto',padding:'68px 20px 56px'}}>
+        <div style={{textAlign:'center',marginBottom:42}}>
+          <div className="sec-title">لماذا منصتنا؟</div>
+          <div className="sec-sub">نوفر بيئة آمنة وشفافة لتداول الثروة الحيوانية</div>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18}}>
+          {[
+            {ic:I.shield,t:'أمان وموثوقية',d:'جميع الموردين معتمدون رسمياً، وكل حيوان يخضع لفحص صحي دقيق.',c:'rgba(34,197,94,.1)',tc:'#4ade80'},
+            {ic:I.award, t:'جودة مضمونة', d:'شهادات صحية وبياطرة معتمدون يراجعون كل حيوان قبل الإدراج.',c:'rgba(245,158,11,.1)',tc:'#fbbf24'},
+            {ic:I.chart, t:'إدارة ذكية',  d:'لوحة تحكم متكاملة لمتابعة العروض والطلبات والإحصائيات.',c:'rgba(59,130,246,.1)',tc:'#60a5fa'},
+          ].map((f,i)=>(
+            <div key={i} className="glass ghov au" style={{animationDelay:`${i*100}ms`,padding:'28px 24px'}}>
+              <div style={{width:50,height:50,borderRadius:16,background:f.c,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:18}}>
+                <Ico d={f.ic} s={22} c="" style={{color:f.tc}}/>
+              </div>
+              <h3 style={{fontSize:17,fontWeight:800,color:'#f1f5f9',marginBottom:9}}>{f.t}</h3>
+              <p style={{fontSize:13,color:'#94a3b8',lineHeight:1.8}}>{f.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section style={{maxWidth:1100,margin:'0 auto',padding:'0 20px 56px'}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:22}}>
+          <div><div className="sec-title">آخر الحيوانات</div><div className="sec-sub">أحدث العروض من الموردين المعتمدين</div></div>
+          <button className="btn out-btn sm-btn" onClick={()=>setPage('products')}>عرض الكل<Ico d={I.arr} s={12}/></button>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(230px,1fr))',gap:16}}>
+          {ANIMALS_12.slice(0,4).map((a,i)=>(
+            <div key={i} className="au" style={{animationDelay:`${i*80}ms`}}><AnimalCard a={a}/></div>
+          ))}
+        </div>
+      </section>
+
+      <section style={{maxWidth:1100,margin:'0 auto',padding:'0 20px 56px'}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:22}}>
+          <div><div className="sec-title">آخر الأخبار</div><div className="sec-sub">أحدث المستجدات والإعلانات</div></div>
+          <button className="btn out-btn sm-btn" onClick={()=>setPage('news')}>عرض الكل<Ico d={I.arr} s={12}/></button>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))',gap:16}}>
+          {pubNews.map(n=><NewsCard key={n.id} n={n} setPage={setPage}/>)}
+        </div>
+      </section>
+
+      <section style={{padding:'0 20px 68px'}}>
+        <div style={{maxWidth:720,margin:'0 auto'}} className="glass">
+          <div style={{padding:'50px 36px',textAlign:'center',position:'relative',overflow:'hidden'}}>
+            <div style={{position:'absolute',inset:0,background:'linear-gradient(135deg,rgba(34,197,94,.06),transparent)',pointerEvents:'none'}}/>
+            <h2 style={{fontSize:34,fontWeight:900,color:'#fff',marginBottom:10,position:'relative'}}>هل أنت مورد؟</h2>
+            <p style={{color:'#94a3b8',marginBottom:26,position:'relative',fontSize:14}}>انضم إلى منصتنا وابدأ في عرض حيواناتك للجهات الحكومية المصرية</p>
+            <button className="btn bg-btn" style={{fontSize:15,padding:'13px 30px',position:'relative'}} onClick={()=>setPage('supplier-register')}>
+              <Ico d={I.plus} s={16}/>سجّل الآن مجاناً
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   NEWS PAGES
+══════════════════════════════════════════════ */
+const NewsPage=({setPage})=>{
+  const {news}=useContext(DataContext);
+  const pubNews=news.filter(n=>n.published);
+  const [cat,setCat]=useState('all');
+  const [q,setQ]=useState('');
+  const cats=['all',...new Set(pubNews.map(n=>n.cat))];
+  const filtered=pubNews.filter(n=>cat==='all'||n.cat===cat).filter(n=>!q||n.title.includes(q)||n.summary.includes(q));
+  return(
+    <div style={{maxWidth:1100,margin:'0 auto',padding:'44px 20px'}} className="pg">
+      <div className="au" style={{marginBottom:28}}><div className="sec-title">آخر الأخبار</div><div className="sec-sub">تابع أحدث المستجدات والإعلانات الرسمية</div></div>
+      <div className="glass au1" style={{padding:'14px 18px',marginBottom:22,display:'flex',flexWrap:'wrap',gap:12,alignItems:'center'}}>
+        <div style={{position:'relative',flex:1,minWidth:180}}>
+          <Ico d={I.search} s={14} c="" style={{position:'absolute',right:11,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="ابحث في الأخبار..." className="inp" style={{paddingRight:34,fontSize:13}}/>
+        </div>
+        <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
+          {cats.map(c=><button key={c} onClick={()=>setCat(c)} className={`tab ${cat===c?'tba':''}`} style={{fontSize:12}}>{c==='all'?'الكل':c}</button>)}
+        </div>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(290px,1fr))',gap:18}}>
+        {filtered.length>0?filtered.map((n,i)=>(
+          <div key={n.id} className="au" style={{animationDelay:`${i*60}ms`}}><NewsCard n={n} setPage={setPage}/></div>
+        )):<div style={{gridColumn:'1/-1',textAlign:'center',padding:60,color:'#64748b'}}><Ico d={I.news} s={40} c="" style={{display:'block',margin:'0 auto 12px',color:'#334155'}}/>لا توجد أخبار حالياً</div>}
+      </div>
+    </div>
+  );
+};
+
+const NewsDetail=({id,setPage})=>{
+  const {news}=useContext(DataContext);
+  const n=news.find(x=>x.id===parseInt(id));
+  if(!n)return<div style={{textAlign:'center',padding:60,color:'#64748b'}}>الخبر غير موجود</div>;
+  const others=news.filter(x=>x.id!==n.id&&x.published).slice(0,3);
+  return(
+    <div style={{maxWidth:840,margin:'0 auto',padding:'44px 20px'}} className="pg">
+      <button className="btn gh-btn sm-btn au" style={{marginBottom:20}} onClick={()=>setPage('news')}><Ico d={I.arrL} s={14}/>العودة للأخبار</button>
+      <div className="glass au1" style={{overflow:'hidden',marginBottom:28}}>
+        <div style={{height:190,display:'flex',alignItems:'center',justifyContent:'center',fontSize:78,background:n.color}}>{n.emoji}</div>
+        <div style={{padding:'26px 30px'}}>
+          <div style={{display:'flex',gap:10,marginBottom:14,flexWrap:'wrap',alignItems:'center'}}>
+            <span className="badge bg">{n.cat}</span>
+            <span style={{fontSize:12,color:'#64748b'}}>{n.date}</span>
+            <span style={{fontSize:12,color:'#64748b'}}>· {n.read}</span>
+            <span style={{fontSize:12,color:'#64748b'}}>· {n.author}</span>
+          </div>
+          <h1 style={{fontSize:22,fontWeight:900,color:'#f1f5f9',lineHeight:1.45,marginBottom:18}}>{n.title}</h1>
+          <p style={{fontSize:15,color:'#94a3b8',lineHeight:2.1,fontFamily:'Amiri,serif'}}>{n.body}</p>
+        </div>
+      </div>
+      {others.length>0&&<div>
+        <div style={{fontWeight:800,fontSize:14,color:'#4ade80',marginBottom:14}}>أخبار ذات صلة</div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(250px,1fr))',gap:14}}>
+          {others.map(x=><NewsCard key={x.id} n={x} setPage={setPage}/>)}
+        </div>
+      </div>}
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   RESEARCH PAGE (Public)
+══════════════════════════════════════════════ */
+const ResearchPage=()=>{
+  const {research}=useContext(DataContext);
+  const showToast=useContext(ToastContext);
+  const [q,setQ]=useState('');
+  const [cat,setCat]=useState('all');
+  const cats=['all',...new Set(research.map(r=>r.cat))];
+  const list=research.filter(r=>cat==='all'||r.cat===cat).filter(r=>!q||r.title.includes(q)||r.author.includes(q));
+  return(
+    <div style={{maxWidth:1000,margin:'0 auto',padding:'44px 20px'}} className="pg">
+      <div className="au" style={{marginBottom:28}}><div className="sec-title">البحوث والدراسات</div><div className="sec-sub">أبحاث ودراسات الجهة في مجال الطب البيطري</div></div>
+      <div className="glass au1" style={{padding:'14px 18px',marginBottom:22,display:'flex',flexWrap:'wrap',gap:12,alignItems:'center'}}>
+        <div style={{position:'relative',flex:1,minWidth:180}}>
+          <Ico d={I.search} s={14} c="" style={{position:'absolute',right:11,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="ابحث في الدراسات..." className="inp" style={{paddingRight:34,fontSize:13}}/>
+        </div>
+        <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
+          {cats.map(c=><button key={c} onClick={()=>setCat(c)} className={`tab ${cat===c?'tba':''}`} style={{fontSize:11}}>{c==='all'?'الكل':c}</button>)}
+        </div>
+      </div>
+      <div style={{display:'flex',flexDirection:'column',gap:14}}>
+        {list.map((r,i)=>(
+          <div key={r.id} className="glass ghov au" style={{animationDelay:`${i*55}ms`,padding:'18px 22px',display:'flex',gap:18,alignItems:'center'}}>
+            <div style={{width:52,height:52,borderRadius:14,background:'rgba(59,130,246,.1)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}><Ico d={I.doc} s={22} c="text-blue-400"/></div>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{display:'flex',gap:7,marginBottom:5,flexWrap:'wrap',alignItems:'center'}}>
+                <span className="badge bb" style={{fontSize:10}}>{r.cat}</span>
+                <span style={{fontSize:11,color:'#64748b'}}>{r.year}</span>
+                <span style={{fontSize:11,color:'#64748b'}}>· {r.pages} صفحة</span>
+              </div>
+              <h3 style={{fontWeight:700,fontSize:14,color:'#f1f5f9',marginBottom:4,lineHeight:1.5}}>{r.title}</h3>
+              <p style={{fontSize:12,color:'#94a3b8',marginBottom:6}}>{r.author}</p>
+              {r.abstract&&<p style={{fontSize:11,color:'#64748b',lineHeight:1.6}} className="clamp2">{r.abstract}</p>}
+            </div>
+            <div style={{display:'flex',gap:7,flexShrink:0,flexDirection:'column'}}>
+              <button className="btn out-btn sm-btn" style={{justifyContent:'center'}}><Ico d={I.eye} s={12}/>قراءة</button>
+              {r.downloadable&&(
+                <button className="dl-btn" onClick={()=>showToast('جارٍ تحميل الدراسة... 📄')}>
+                  <Ico d={I.dl} s={12}/>تحميل PDF
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+        {list.length===0&&<div style={{textAlign:'center',padding:60,color:'#64748b'}}><Ico d={I.res} s={40} c="" style={{display:'block',margin:'0 auto 12px',color:'#334155'}}/>لا توجد أبحاث</div>}
+      </div>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   ADMIN — NEWS MANAGEMENT
+══════════════════════════════════════════════ */
+const NewsManagementPanel=()=>{
+  const {news,addNews,updateNews,deleteNews}=useContext(DataContext);
+  const showToast=useContext(ToastContext);
+  const [modal,setModal]=useState(false);
+  const [editId,setEditId]=useState(null);
+  const [delId,setDelId]=useState(null);
+  const [q,setQ]=useState('');
+
+  const EMPTY={title:'',cat:'أخبار رسمية',summary:'',body:'',date:new Date().toLocaleDateString('ar-EG'),author:'',emoji:'📰',color:'rgba(34,197,94,.08)',read:'3 دقائق',published:true};
+  const [form,setForm]=useState(EMPTY);
+  const CATS_N=['أخبار رسمية','صحة حيوانية','تعاون دولي','أبحاث','تدريب','إنجاز'];
+  const EMOJIS_N=['📰','🌐','💉','🤝','🔬','📚','🏆','⚡','🌱','🐄'];
+
+  const openAdd=()=>{setForm(EMPTY);setEditId(null);setModal(true)};
+  const openEdit=n=>{setForm({...n});setEditId(n.id);setModal(true)};
+  const save=()=>{
+    if(!form.title||!form.body){showToast('يرجى ملء جميع الحقول المطلوبة','error');return}
+    if(editId){updateNews(editId,form);showToast('تم تحديث الخبر بنجاح ✅')}
+    else{addNews(form);showToast('تم إضافة الخبر بنجاح ✅')}
+    setModal(false);
+  };
+  const confirmDel=()=>{deleteNews(delId);setDelId(null);showToast('تم حذف الخبر','error')};
+  const toggle=n=>updateNews(n.id,{...n,published:!n.published});
+
+  const filtered=news.filter(n=>!q||n.title.includes(q)||n.cat.includes(q));
+
+  return(
+    <div className="pg">
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:22}}>
+        <div><h2 style={{fontSize:18,fontWeight:900,color:'#f1f5f9',marginBottom:2}}>إدارة الأخبار والمقالات</h2><p style={{fontSize:12,color:'#64748b'}}>{news.length} خبر مسجل — {news.filter(n=>n.published).length} منشور</p></div>
+        <button className="btn bg-btn" onClick={openAdd}><Ico d={I.plus} s={15}/>إضافة خبر جديد</button>
+      </div>
+
+      <div className="glass2" style={{padding:'12px 16px',marginBottom:16,display:'flex',gap:10,alignItems:'center'}}>
+        <div style={{position:'relative',flex:1}}>
+          <Ico d={I.search} s={13} c="" style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+          <input value={q} onChange={e=>setQ(e.target.value)} className="inp" style={{paddingRight:32,fontSize:12,padding:'8px 32px 8px 10px'}} placeholder="بحث في الأخبار..."/>
+        </div>
+        <span style={{fontSize:11,color:'#64748b',flexShrink:0}}>{filtered.length} نتيجة</span>
+      </div>
+
+      <div className="glass" style={{overflow:'hidden'}}>
+        <table style={{width:'100%',borderCollapse:'collapse'}} className="tbl">
+          <thead><tr>{['الخبر','التصنيف','الكاتب','التاريخ','الحالة','نشر','إجراء'].map(h=><th key={h}>{h}</th>)}</tr></thead>
+          <tbody>
+            {filtered.map((n,i)=>(
+              <tr key={n.id} className="au" style={{animationDelay:`${i*30}ms`}}>
+                <td>
+                  <div style={{display:'flex',gap:10,alignItems:'center'}}>
+                    <div style={{width:36,height:36,borderRadius:10,background:n.color,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18,flexShrink:0}}>{n.emoji}</div>
+                    <div>
+                      <div style={{fontWeight:700,fontSize:12,color:'#f1f5f9',lineHeight:1.4,maxWidth:200}} className="clamp2">{n.title}</div>
+                      <div style={{fontSize:10,color:'#64748b',marginTop:1}}>{n.read}</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span className="badge bg" style={{fontSize:10}}>{n.cat}</span></td>
+                <td style={{fontSize:12,color:'#94a3b8'}}>{n.author}</td>
+                <td style={{fontSize:11,color:'#64748b'}}>{n.date}</td>
+                <td><span className={`badge ${n.published?'bg':'bgr'}`}>{n.published?'منشور':'مسودة'}</span></td>
+                <td>
+                  <button onClick={()=>toggle(n)} style={{width:40,height:22,borderRadius:50,background:n.published?'#16a34a':'rgba(255,255,255,.1)',position:'relative',cursor:'pointer',border:'none',transition:'background .3s'}}>
+                    <div style={{width:16,height:16,borderRadius:'50%',background:'#fff',position:'absolute',top:3,transition:'right .3s',right:n.published?3:21}}/>
+                  </button>
+                </td>
+                <td>
+                  <div style={{display:'flex',gap:5}}>
+                    <button className="btn gold-btn sm-btn" style={{padding:'5px 8px'}} onClick={()=>openEdit(n)}><Ico d={I.edit} s={12}/></button>
+                    <button className="btn red-btn sm-btn" style={{padding:'5px 8px'}} onClick={()=>setDelId(n.id)}><Ico d={I.trash} s={12}/></button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+            {filtered.length===0&&<tr><td colSpan={7} style={{textAlign:'center',padding:40,color:'#64748b'}}>لا توجد أخبار</td></tr>}
+          </tbody>
+        </table>
+      </div>
+
+      {modal&&(
+        <Modal title={editId?'تعديل الخبر':'إضافة خبر جديد'} onClose={()=>setModal(false)} maxW={680}
+          footer={<><button className="btn gh-btn" onClick={()=>setModal(false)}>إلغاء</button><button className="btn bg-btn" onClick={save}><Ico d={I.save} s={14}/>{editId?'حفظ التعديلات':'نشر الخبر'}</button></>}>
+          <FieldRow>
+            <div style={{gridColumn:'1/-1'}}><Label s="عنوان الخبر *"/><input value={form.title} onChange={e=>setForm(f=>({...f,title:e.target.value}))} className="inp" placeholder="عنوان الخبر"/></div>
+          </FieldRow>
+          <FieldRow>
+            <div><Label s="التصنيف"/><select value={form.cat} onChange={e=>setForm(f=>({...f,cat:e.target.value}))} className="inp" style={{cursor:'pointer'}}>{CATS_N.map(c=><option key={c}>{c}</option>)}</select></div>
+            <div><Label s="الكاتب / المصدر"/><input value={form.author} onChange={e=>setForm(f=>({...f,author:e.target.value}))} className="inp" placeholder="اسم الكاتب"/></div>
+          </FieldRow>
+          <FieldRow>
+            <div><Label s="أيقونة الخبر"/>
+              <div style={{display:'flex',flexWrap:'wrap',gap:8,marginTop:4}}>
+                {EMOJIS_N.map(em=>(
+                  <button key={em} onClick={()=>setForm(f=>({...f,emoji:em}))}
+                    style={{width:34,height:34,borderRadius:8,fontSize:18,border:`2px solid ${form.emoji===em?'#22c55e':'rgba(255,255,255,.1)'}`,background:form.emoji===em?'rgba(34,197,94,.12)':'rgba(255,255,255,.03)',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    {em}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div><Label s="وقت القراءة"/><input value={form.read} onChange={e=>setForm(f=>({...f,read:e.target.value}))} className="inp" placeholder="مثال: 3 دقائق"/></div>
+          </FieldRow>
+          <div><Label s="ملخص الخبر *"/><textarea value={form.summary} onChange={e=>setForm(f=>({...f,summary:e.target.value}))} className="inp" rows={2} placeholder="ملخص قصير يظهر في البطاقة..." style={{resize:'none'}}/></div>
+          <div><Label s="محتوى الخبر الكامل *"/><textarea value={form.body} onChange={e=>setForm(f=>({...f,body:e.target.value}))} className="inp" rows={5} placeholder="اكتب محتوى الخبر الكامل هنا..." style={{resize:'vertical'}}/></div>
+          <div style={{display:'flex',alignItems:'center',gap:10,padding:'11px 14px',background:'rgba(255,255,255,.03)',borderRadius:10,border:'1px solid rgba(255,255,255,.08)'}}>
+            <input type="checkbox" checked={form.published} onChange={e=>setForm(f=>({...f,published:e.target.checked}))} style={{width:15,height:15,accentColor:'#16a34a'}}/>
+            <span style={{fontSize:13,color:'#94a3b8'}}>نشر الخبر فوراً على الموقع</span>
+          </div>
+        </Modal>
+      )}
+      {delId&&<DeleteConfirm onClose={()=>setDelId(null)} onConfirm={confirmDel} label="هذا الخبر"/>}
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   ADMIN — RESEARCH MANAGEMENT
+══════════════════════════════════════════════ */
+const ResearchManagementPanel=()=>{
+  const {research,addResearch,updateResearch,deleteResearch}=useContext(DataContext);
+  const showToast=useContext(ToastContext);
+  const [modal,setModal]=useState(false);
+  const [editId,setEditId]=useState(null);
+  const [delId,setDelId]=useState(null);
+  const [q,setQ]=useState('');
+
+  const EMPTY={title:'',cat:'أمراض معدية',author:'',year:new Date().getFullYear(),pages:'',abstract:'',downloadable:true};
+  const [form,setForm]=useState(EMPTY);
+  const CATS_R=['أمراض معدية','تغذية حيوانية','تحصينات','صحة الحيوان','تكاثر','تكنولوجيا بيطرية','علم الوراثة','رعاية حيوانية'];
+
+  const openAdd=()=>{setForm(EMPTY);setEditId(null);setModal(true)};
+  const openEdit=r=>{setForm({...r});setEditId(r.id);setModal(true)};
+  const save=()=>{
+    if(!form.title||!form.author){showToast('يرجى ملء الحقول المطلوبة','error');return}
+    if(editId){updateResearch(editId,form);showToast('تم تحديث البحث بنجاح ✅')}
+    else{addResearch(form);showToast('تم إضافة البحث بنجاح ✅')}
+    setModal(false);
+  };
+  const confirmDel=()=>{deleteResearch(delId);setDelId(null);showToast('تم حذف البحث','error')};
+  const filtered=research.filter(r=>!q||r.title.includes(q)||r.author.includes(q));
+
+  return(
+    <div className="pg">
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:22}}>
+        <div><h2 style={{fontSize:18,fontWeight:900,color:'#f1f5f9',marginBottom:2}}>إدارة الأبحاث والدراسات</h2><p style={{fontSize:12,color:'#64748b'}}>{research.length} بحث مسجل — {research.filter(r=>r.downloadable).length} قابل للتحميل</p></div>
+        <button className="btn bg-btn" onClick={openAdd}><Ico d={I.plus} s={15}/>إضافة بحث جديد</button>
+      </div>
+
+      <div className="glass2" style={{padding:'12px 16px',marginBottom:16,display:'flex',gap:10,alignItems:'center'}}>
+        <div style={{position:'relative',flex:1}}>
+          <Ico d={I.search} s={13} c="" style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+          <input value={q} onChange={e=>setQ(e.target.value)} className="inp" style={{paddingRight:32,fontSize:12,padding:'8px 32px 8px 10px'}} placeholder="بحث في الدراسات..."/>
+        </div>
+        <span style={{fontSize:11,color:'#64748b',flexShrink:0}}>{filtered.length} نتيجة</span>
+      </div>
+
+      <div style={{display:'flex',flexDirection:'column',gap:12}}>
+        {filtered.map((r,i)=>(
+          <div key={r.id} className="glass ghov au" style={{animationDelay:`${i*40}ms`,padding:'16px 20px',display:'flex',gap:14,alignItems:'center'}}>
+            <div style={{width:46,height:46,borderRadius:12,background:'rgba(59,130,246,.1)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}><Ico d={I.doc} s={20} c="text-blue-400"/></div>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{display:'flex',gap:7,marginBottom:5,flexWrap:'wrap',alignItems:'center'}}>
+                <span className="badge bb" style={{fontSize:10}}>{r.cat}</span>
+                <span style={{fontSize:11,color:'#64748b'}}>{r.year}</span>
+                <span style={{fontSize:11,color:'#64748b'}}>· {r.pages} صفحة</span>
+                {r.downloadable&&<span className="badge bg" style={{fontSize:10}}><Ico d={I.dl} s={9}/>قابل للتحميل</span>}
+              </div>
+              <div style={{fontWeight:700,fontSize:13,color:'#f1f5f9',marginBottom:2}}>{r.title}</div>
+              <div style={{fontSize:11,color:'#94a3b8'}}>{r.author}</div>
+            </div>
+            <div style={{display:'flex',gap:6,flexShrink:0}}>
+              <button className="btn gold-btn sm-btn" style={{padding:'6px 10px'}} onClick={()=>openEdit(r)}><Ico d={I.edit} s={13}/>تعديل</button>
+              <button className="btn red-btn sm-btn" style={{padding:'6px 10px'}} onClick={()=>setDelId(r.id)}><Ico d={I.trash} s={13}/></button>
+            </div>
+          </div>
+        ))}
+        {filtered.length===0&&<div style={{textAlign:'center',padding:60,color:'#64748b'}}>لا توجد أبحاث</div>}
+      </div>
+
+      {modal&&(
+        <Modal title={editId?'تعديل البحث':'إضافة بحث جديد'} onClose={()=>setModal(false)} maxW={640}
+          footer={<><button className="btn gh-btn" onClick={()=>setModal(false)}>إلغاء</button><button className="btn bg-btn" onClick={save}><Ico d={I.save} s={14}/>{editId?'حفظ التعديلات':'إضافة البحث'}</button></>}>
+          <div style={{gridColumn:'1/-1'}}><Label s="عنوان البحث *"/><input value={form.title} onChange={e=>setForm(f=>({...f,title:e.target.value}))} className="inp" placeholder="عنوان الدراسة أو البحث"/></div>
+          <FieldRow>
+            <div><Label s="المؤلف / الكاتب *"/><input value={form.author} onChange={e=>setForm(f=>({...f,author:e.target.value}))} className="inp" placeholder="اسم المؤلف"/></div>
+            <div><Label s="التصنيف"/><select value={form.cat} onChange={e=>setForm(f=>({...f,cat:e.target.value}))} className="inp" style={{cursor:'pointer'}}>{CATS_R.map(c=><option key={c}>{c}</option>)}</select></div>
+          </FieldRow>
+          <FieldRow>
+            <div><Label s="سنة النشر"/><input type="number" value={form.year} onChange={e=>setForm(f=>({...f,year:parseInt(e.target.value)||2025}))} className="inp" placeholder="2025"/></div>
+            <div><Label s="عدد الصفحات"/><input type="number" value={form.pages} onChange={e=>setForm(f=>({...f,pages:e.target.value}))} className="inp" placeholder="42"/></div>
+          </FieldRow>
+          <div><Label s="ملخص البحث"/><textarea value={form.abstract} onChange={e=>setForm(f=>({...f,abstract:e.target.value}))} className="inp" rows={3} placeholder="ملخص تنفيذي للبحث..." style={{resize:'vertical'}}/></div>
+          <div style={{display:'flex',alignItems:'center',gap:10,padding:'11px 14px',background:'rgba(255,255,255,.03)',borderRadius:10,border:'1px solid rgba(255,255,255,.08)'}}>
+            <input type="checkbox" checked={form.downloadable} onChange={e=>setForm(f=>({...f,downloadable:e.target.checked}))} style={{width:15,height:15,accentColor:'#16a34a'}}/>
+            <span style={{fontSize:13,color:'#94a3b8'}}>السماح بتحميل البحث (PDF) من الموقع</span>
+          </div>
+        </Modal>
+      )}
+      {delId&&<DeleteConfirm onClose={()=>setDelId(null)} onConfirm={confirmDel} label="هذا البحث"/>}
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   ADMIN — SETTINGS / THEME PANEL
+══════════════════════════════════════════════ */
+const SettingsPanel=()=>{
+  const {theme,setTheme}=useContext(ThemeContext);
+  const showToast=useContext(ToastContext);
+  const {authUser}=useContext(AuthContext);
+  const [saved,setSaved]=useState(false);
+
+  const applyTheme=t=>{setTheme(t);showToast(`تم تطبيق ${THEMES[t].name} على الموقع 🎨`)};
+
+  const themeCards=[
+    {id:'dark',name:'الوضع الداكن',desc:'خلفية داكنة — نصوص خضراء وبيضاء',icon:'🌙',colors:['#0b1612','#22c55e','#94a3b8','#f59e0b']},
+    {id:'light',name:'الوضع الفاتح',desc:'خلفية بيضاء — عناوين خضراء — نص أسود',icon:'☀️',colors:['#ffffff','#16a34a','#111827','#f3f4f6']},
+    {id:'green',name:'الوضع الأخضر',desc:'خلفية خضراء — نص أبيض ومضيء',icon:'🌿',colors:['#14532d','#ffffff','#86efac','#4ade80']},
+  ];
+
+  return(
+    <div className="pg">
+      <div style={{marginBottom:28}}>
+        <h2 style={{fontSize:18,fontWeight:900,color:'#f1f5f9',marginBottom:4}}>إعدادات الموقع والمظهر</h2>
+        <p style={{fontSize:12,color:'#64748b'}}>التغييرات تنعكس فوراً على جميع صفحات الموقع</p>
+      </div>
+
+      {/* Theme selector */}
+      <div className="glass" style={{padding:'24px',marginBottom:20}}>
+        <div style={{fontWeight:800,fontSize:14,color:'#4ade80',marginBottom:18,display:'flex',gap:8,alignItems:'center'}}>
+          <Ico d={I.palette} s={16}/>مظهر الموقع (Theme)
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:16}}>
+          {themeCards.map(t=>(
+            <div key={t.id} onClick={()=>applyTheme(t.id)}
+              style={{padding:'18px 16px',borderRadius:14,border:`2px solid ${theme===t.id?'#22c55e':'rgba(255,255,255,.08)'}`,background:theme===t.id?'rgba(34,197,94,.06)':'rgba(255,255,255,.02)',cursor:'pointer',transition:'all .2s',position:'relative'}}>
+              {theme===t.id&&<div style={{position:'absolute',top:10,left:10}}><span className="badge bg" style={{fontSize:10}}>✓ نشط</span></div>}
+              <div style={{fontSize:32,marginBottom:12}}>{t.icon}</div>
+              <div style={{fontWeight:800,fontSize:14,color:'#f1f5f9',marginBottom:4}}>{t.name}</div>
+              <div style={{fontSize:12,color:'#94a3b8',marginBottom:12,lineHeight:1.6}}>{t.desc}</div>
+              <div style={{display:'flex',gap:7}}>
+                {t.colors.map((c,i)=>(
+                  <div key={i} style={{width:22,height:22,borderRadius:'50%',background:c,border:'2px solid rgba(255,255,255,.12)'}}/>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Preview */}
+      <div className="glass" style={{padding:'22px',marginBottom:20}}>
+        <div style={{fontWeight:800,fontSize:14,color:'#4ade80',marginBottom:16,display:'flex',gap:8,alignItems:'center'}}>
+          <Ico d={I.eye} s={16}/>معاينة المظهر الحالي
+        </div>
+        <div style={{padding:'20px',borderRadius:12,border:'1px solid rgba(255,255,255,.08)',background:'rgba(255,255,255,.02)'}}>
+          <div style={{marginBottom:12}}>
+            <div style={{fontSize:20,fontWeight:900,color:'#4ade80',marginBottom:4}}>عنوان رئيسي — هذا مثال للون العنوان</div>
+            <div style={{fontSize:14,color:'#e2e8f0',lineHeight:1.7,marginBottom:8}}>هذا نص توضيحي يوضح كيفية ظهور النصوص العادية في المظهر الحالي.</div>
+            <div style={{fontSize:12,color:'#94a3b8'}}>هذا نص ثانوي (muted) — يُستخدم للتفاصيل والملاحظات</div>
+          </div>
+          <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
+            <button className="btn bg-btn btn-sm">زر رئيسي</button>
+            <button className="btn out-btn btn-sm">زر ثانوي</button>
+            <span className="badge bg">نشط</span>
+            <span className="badge ba">انتباه</span>
+            <span className="badge bb">معلومة</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Admin info */}
+      <div className="glass" style={{padding:'20px'}}>
+        <div style={{fontWeight:800,fontSize:14,color:'#4ade80',marginBottom:14,display:'flex',gap:8,alignItems:'center'}}>
+          <Ico d={I.user} s={16}/>معلومات الحساب
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+          {[
+            ['الاسم',authUser?.name],['الدور','مدير النظام'],
+            ['البريد الإلكتروني',authUser?.email],['آخر دخول',new Date().toLocaleDateString('ar-EG')],
+          ].map(([k,v])=>(
+            <div key={k} style={{background:'rgba(255,255,255,.03)',borderRadius:10,padding:'12px 14px'}}>
+              <div style={{fontSize:10,color:'#64748b',marginBottom:3}}>{k}</div>
+              <div style={{fontSize:13,fontWeight:600,color:'#f1f5f9'}}>{v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   ADMIN DASHBOARD — MAIN
+══════════════════════════════════════════════ */
+const AdminDashboard=({setPage})=>{
+  const {logout,authUser}=useContext(AuthContext);
+  const {news}=useContext(DataContext);
+  const {research}=useContext(DataContext);
+  const [at,setAt]=useState('overview');
+  const [sideOpen,setSideOpen]=useState(true);
+
+  const adminNav=[
+    {id:'overview',l:'نظرة عامة',ic:I.chart},
+    {id:'news-mgmt',l:'إدارة الأخبار',ic:I.news},
+    {id:'research-mgmt',l:'إدارة البحوث',ic:I.res},
+    {id:'animals',l:'الحيوانات',ic:I.cow},
+    {id:'suppliers',l:'الموردون',ic:I.sup},
+    {id:'settings',l:'الإعدادات',ic:I.palette},
+  ];
+
+  const pending=[
+    {name:'خالد محمود',type:'جاموس تسمين',price:85000,date:'15 مار'},
+    {name:'رامي حسين',type:'بقرة هولشتاين',price:42000,date:'14 مار'},
+    {name:'سامي فرج',type:'عجل جاموسي',price:14000,date:'13 مار'},
+  ];
+
+  const chartD=[
+    {m:'أكت',c:42,b:78},{m:'نوف',c:58,b:92},{m:'ديس',c:35,b:65},
+    {m:'ينا',c:70,b:110},{m:'فبر',c:55,b:88},{m:'مار',c:80,b:130},
+  ];
+
+  const suppList=[
+    {name:'محمد عبدالله',loc:'الجيزة',a:4,status:'active',j:'يناير 2024'},
+    {name:'أحمد سالم',loc:'الدقهلية',a:2,status:'active',j:'مارس 2025'},
+    {name:'علي حسن',loc:'المنوفية',a:3,status:'active',j:'فبراير 2025'},
+    {name:'خالد محمود',loc:'الفيوم',a:2,status:'pending',j:'مارس 2026'},
+  ];
+
+  const OverviewContent=()=>{
+    const oStats=[
+      {v:'247',l:'حيوان مسجل',ic:I.cow,delta:'+12%'},
+      {v:suppList.length.toString(),l:'مورد نشط',ic:I.sup,delta:'+4%'},
+      {v:news.filter(n=>!n.published).length.toString(),l:'طلبات معلقة',ic:I.doc,delta:'-2%'},
+      {v:research.length.toString(),l:'بحث منشور',ic:I.res,delta:'+8%'},
+    ];
+    return(
+      <div className="pg">
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:22}}>
+          <div>
+            <h1 style={{fontSize:22,fontWeight:900,color:'#fff',marginBottom:2}}>نظرة عامة</h1>
+            <p style={{fontSize:12,color:'#64748b'}}>مرحباً، {authUser?.name} — {new Date().toLocaleDateString('ar-EG')}</p>
+          </div>
+          <div style={{display:'flex',gap:7,alignItems:'center'}}>
+            <div style={{display:'flex',gap:6,alignItems:'center',background:'rgba(255,255,255,.04)',border:'1px solid rgba(255,255,255,.08)',borderRadius:9,padding:'6px 12px',fontSize:11,color:'#94a3b8'}}>
+              <span style={{width:7,height:7,borderRadius:'50%',background:'#22c55e',animation:'pulse 2s infinite'}}/>مباشر
+            </div>
+          </div>
+        </div>
+
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(170px,1fr))',gap:14,marginBottom:20}}>
+          {oStats.map((s,i)=>(
+            <div key={i} className="glass ghov au" style={{animationDelay:`${i*70}ms`,padding:'18px 16px',position:'relative',overflow:'hidden'}}>
+              <div style={{position:'absolute',top:-20,left:-20,width:80,height:80,borderRadius:'50%',background:'rgba(34,197,94,.08)',filter:'blur(20px)'}}/>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:12}}>
+                <div style={{width:36,height:36,borderRadius:10,background:'rgba(34,197,94,.12)',display:'flex',alignItems:'center',justifyContent:'center'}}><Ico d={s.ic} s={16} c="text-green-400"/></div>
+                <span style={{fontSize:10,fontWeight:800,color:s.delta.startsWith('+')?'#4ade80':'#f87171',background:s.delta.startsWith('+')?'rgba(34,197,94,.12)':'rgba(239,68,68,.12)',padding:'3px 8px',borderRadius:50,border:`1px solid ${s.delta.startsWith('+')?'rgba(34,197,94,.25)':'rgba(239,68,68,.25)'}`}}>{s.delta}</span>
+              </div>
+              <div style={{fontSize:26,fontWeight:900,color:'#fff'}}>{s.v}</div>
+              <div style={{fontSize:11,color:'#64748b',marginTop:2}}>{s.l}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:18,marginBottom:18}}>
+          <div className="glass" style={{padding:'20px 22px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+              <div style={{fontWeight:800,fontSize:13,color:'#f1f5f9'}}>إحصائيات شهرية</div>
+              <div style={{display:'flex',gap:10,fontSize:10}}>
+                <span style={{display:'flex',alignItems:'center',gap:4}}><span style={{width:9,height:9,borderRadius:2,background:'#22c55e',display:'inline-block'}}/><span style={{color:'#94a3b8'}}>أبقار</span></span>
+                <span style={{display:'flex',alignItems:'center',gap:4}}><span style={{width:9,height:9,borderRadius:2,background:'#3b82f6',display:'inline-block'}}/><span style={{color:'#94a3b8'}}>جاموس</span></span>
+              </div>
+            </div>
+            <div style={{display:'flex',alignItems:'flex-end',gap:9,height:110}}>
+              {chartD.map((d,i)=>(
+                <div key={i} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+                  <div style={{width:'100%',display:'flex',alignItems:'flex-end',gap:2,height:88}}>
+                    <div style={{flex:1,borderRadius:'3px 3px 0 0',background:'linear-gradient(180deg,#4ade80,#16a34a)',transformOrigin:'bottom',animation:`growUp .8s ${i*80}ms both`,height:`${d.c/130*100}%`}}/>
+                    <div style={{flex:1,borderRadius:'3px 3px 0 0',background:'linear-gradient(180deg,#60a5fa,#2563eb)',transformOrigin:'bottom',animation:`growUp .8s ${i*80+40}ms both`,height:`${d.b/130*100}%`}}/>
+                  </div>
+                  <span style={{fontSize:9,color:'#64748b'}}>{d.m}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="glass" style={{padding:'20px 22px'}}>
+            <div style={{fontWeight:800,fontSize:13,color:'#f1f5f9',marginBottom:14}}>المحتوى المنشور</div>
+            {[
+              ['الأخبار المنشورة',news.filter(n=>n.published).length,news.length,'#22c55e'],
+              ['الأبحاث القابلة للتحميل',research.filter(r=>r.downloadable).length,research.length,'#3b82f6'],
+              ['الأبحاث الكلية',research.length,research.length,'#a855f7'],
+            ].map(([l,v,t,c])=>(
+              <div key={l} style={{marginBottom:13}}>
+                <div style={{display:'flex',justifyContent:'space-between',marginBottom:5,fontSize:11}}>
+                  <span style={{color:'#94a3b8'}}>{l}</span>
+                  <span style={{fontWeight:800,color:'#f1f5f9'}}>{v}/{t}</span>
+                </div>
+                <div className="prog"><div className="prog-fill" style={{width:`${t>0?v/t*100:0}%`,background:c}}/></div>
+              </div>
+            ))}
+            <div style={{marginTop:16,display:'flex',gap:8}}>
+              <button className="btn bg-btn btn-sm" onClick={()=>setAt('news-mgmt')} style={{flex:1,justifyContent:'center',fontSize:11}}>إدارة الأخبار</button>
+              <button className="btn out-btn btn-sm" onClick={()=>setAt('research-mgmt')} style={{flex:1,justifyContent:'center',fontSize:11}}>إدارة البحوث</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="glass" style={{overflow:'hidden'}}>
+          <div style={{padding:'14px 20px',borderBottom:'1px solid rgba(255,255,255,.06)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+            <div style={{fontWeight:800,fontSize:13,color:'#4ade80',display:'flex',gap:7,alignItems:'center'}}><Ico d={I.bell} s={14}/>طلبات تحتاج موافقة ({pending.length})</div>
+          </div>
+          <table style={{width:'100%',borderCollapse:'collapse'}} className="tbl">
+            <thead><tr>{['المورد','النوع','السعر','التاريخ','إجراء'].map(h=><th key={h}>{h}</th>)}</tr></thead>
+            <tbody>
+              {pending.map((r,i)=>(
+                <tr key={i}>
+                  <td style={{fontWeight:700,fontSize:13,color:'#f1f5f9'}}>{r.name}</td>
+                  <td style={{fontSize:12,color:'#94a3b8'}}>{r.type}</td>
+                  <td style={{fontWeight:800,color:'#4ade80',fontSize:13}}>{r.price.toLocaleString('ar-EG')} ج</td>
+                  <td style={{fontSize:11,color:'#64748b'}}>{r.date}</td>
+                  <td>
+                    <div style={{display:'flex',gap:5}}>
+                      <button className="btn sm-btn" style={{background:'rgba(34,197,94,.12)',color:'#4ade80',padding:'4px 9px'}}><Ico d={I.check} s={11}/></button>
+                      <button className="btn red-btn sm-btn" style={{padding:'4px 9px'}}><Ico d={I.x} s={11}/></button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
+
+  const SuppliersContent=()=>(
+    <div className="pg">
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+        <h2 style={{fontSize:18,fontWeight:900,color:'#f1f5f9'}}>إدارة الموردين</h2>
+        <div style={{position:'relative'}}>
+          <Ico d={I.search} s={13} c="" style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+          <input className="inp" style={{paddingRight:32,fontSize:12,width:200}} placeholder="بحث..."/>
+        </div>
+      </div>
+      <div className="glass" style={{overflow:'hidden'}}>
+        <table style={{width:'100%',borderCollapse:'collapse'}} className="tbl">
+          <thead><tr>{['المورد','المحافظة','الحيوانات','الانضمام','الحالة','إجراء'].map(h=><th key={h}>{h}</th>)}</tr></thead>
+          <tbody>
+            {suppList.map((s,i)=>(
+              <tr key={i}>
+                <td><div style={{display:'flex',gap:10,alignItems:'center'}}>
+                  <div style={{width:32,height:32,borderRadius:9,background:'linear-gradient(135deg,#16a34a,#22c55e)',display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontWeight:900,fontSize:12,flexShrink:0}}>{s.name[0]}</div>
+                  <span style={{fontWeight:700,fontSize:13,color:'#f1f5f9'}}>{s.name}</span>
+                </div></td>
+                <td style={{fontSize:12,color:'#94a3b8'}}>{s.loc}</td>
+                <td style={{fontWeight:800,color:'#fff',fontSize:13}}>{s.a}</td>
+                <td style={{fontSize:11,color:'#64748b'}}>{s.j}</td>
+                <td><span className={`badge ${s.status==='active'?'bg':'ba'}`}>{s.status==='active'?'نشط':'معلق'}</span></td>
+                <td><div style={{display:'flex',gap:5}}>
+                  <button className="btn gh-btn sm-btn" style={{padding:'5px 8px'}}><Ico d={I.eye} s={12}/></button>
+                  <button className="btn gold-btn sm-btn" style={{padding:'5px 8px'}}><Ico d={I.edit} s={12}/></button>
+                </div></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  return(
+    <div style={{display:'flex',height:'calc(100vh - 62px)',overflow:'hidden'}}>
+      {/* Sidebar */}
+      <aside style={{width:sideOpen?214:52,flexShrink:0,background:'#080f0b',borderLeft:'1px solid rgba(255,255,255,.06)',display:'flex',flexDirection:'column',transition:'width .25s',overflow:'hidden'}}>
+        <div style={{height:50,display:'flex',alignItems:'center',padding:'0 12px',borderBottom:'1px solid rgba(255,255,255,.06)'}}>
+          {sideOpen&&<span style={{fontSize:10,fontWeight:700,color:'#334155',textTransform:'uppercase',letterSpacing:'.06em',whiteSpace:'nowrap',flex:1}}>لوحة الإدارة</span>}
+          <button onClick={()=>setSideOpen(v=>!v)} style={{border:'none',background:'none',cursor:'pointer',padding:6,borderRadius:8,marginRight:sideOpen?0:'auto'}}>
+            <Ico d={I.menu} s={16} c="text-gray-500"/>
+          </button>
+        </div>
+        <nav style={{flex:1,padding:'10px 8px',display:'flex',flexDirection:'column',gap:2,overflowY:'auto'}}>
+          {adminNav.map(n=>(
+            <button key={n.id} onClick={()=>setAt(n.id)}
+              className={`sbi ${at===n.id?'sba':''}`}
+              style={{justifyContent:sideOpen?'flex-start':'center'}}>
+              <Ico d={n.ic} s={16} style={{flexShrink:0}}/>
+              {sideOpen&&<span style={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{n.l}</span>}
+            </button>
+          ))}
+        </nav>
+        <div style={{padding:'10px 8px',borderTop:'1px solid rgba(255,255,255,.06)',display:'flex',flexDirection:'column',gap:4}}>
+          <button className="sbi" style={{justifyContent:sideOpen?'flex-start':'center'}} onClick={()=>setPage('home')}>
+            <Ico d={I.globe} s={16}/>{sideOpen&&<span style={{whiteSpace:'nowrap'}}>عرض الموقع</span>}
+          </button>
+          <button className="sbi" style={{color:'#f87171',justifyContent:sideOpen?'flex-start':'center'}} onClick={()=>{logout();setPage('home')}}>
+            <Ico d={I.logout} s={16}/>{sideOpen&&<span style={{whiteSpace:'nowrap'}}>تسجيل خروج</span>}
+          </button>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main style={{flex:1,overflow:'auto',padding:'24px 26px',background:'#0b1612'}}>
+        {at==='overview'    &&<OverviewContent/>}
+        {at==='news-mgmt'   &&<NewsManagementPanel/>}
+        {at==='research-mgmt'&&<ResearchManagementPanel/>}
+        {at==='animals'     &&<div className="pg"><h2 style={{fontSize:18,fontWeight:900,color:'#f1f5f9',marginBottom:20}}>إدارة الحيوانات</h2><div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(210px,1fr))',gap:14}}>{ANIMALS_12.map((a,i)=><AnimalCard key={i} a={a}/>)}</div></div>}
+        {at==='suppliers'   &&<SuppliersContent/>}
+        {at==='settings'    &&<SettingsPanel/>}
+      </main>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   OTHER PAGES (About, Minister, Contact, etc)
+══════════════════════════════════════════════ */
+const AboutPage=()=>(
+  <div style={{maxWidth:1000,margin:'0 auto',padding:'44px 20px'}} className="pg">
+    <div style={{textAlign:'center',marginBottom:50}} className="au">
+      <div className="chip" style={{marginBottom:18,display:'inline-flex'}}><Ico d={I.about} s={13}/>من نحن</div>
+      <h1 style={{fontSize:46,fontWeight:900,color:'#fff',marginBottom:6}}>الجهة العامة<br/><span className="shimmer">للخدمات البيطرية</span></h1>
+      <p style={{color:'#94a3b8',maxWidth:540,margin:'14px auto 0',fontSize:15,lineHeight:1.9}}>جهة حكومية مصرية متخصصة في الإشراف على الصحة الحيوانية منذ عام 1897</p>
+    </div>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:18,marginBottom:32}}>
+      {[
+        {ic:I.award,t:'رسالتنا',c:'rgba(34,197,94,.1)',tc:'#4ade80',d:'الحفاظ على صحة الثروة الحيوانية وحماية الصحة العامة من خلال التفتيش والرقابة والبحث العلمي.'},
+        {ic:I.star, t:'رؤيتنا', c:'rgba(245,158,11,.1)',tc:'#fbbf24',d:'أن نكون المرجع الأول لخدمات الصحة الحيوانية في منطقة الشرق الأوسط وأفريقيا.'},
+        {ic:I.shield,t:'قيمنا',  c:'rgba(59,130,246,.1)',tc:'#60a5fa',d:'الشفافية، النزاهة، الكفاءة، التميز في الخدمة العامة، والتعاون مع المنظمات الدولية.'},
+      ].map((v,i)=>(
+        <div key={i} className="glass ghov au1" style={{animationDelay:`${i*100}ms`,padding:'26px 22px'}}>
+          <div style={{width:48,height:48,borderRadius:14,background:v.c,display:'flex',alignItems:'center',justifyContent:'center',marginBottom:16}}><Ico d={v.ic} s={22} c="" style={{color:v.tc}}/></div>
+          <h3 style={{fontSize:16,fontWeight:800,color:'#f1f5f9',marginBottom:9}}>{v.t}</h3>
+          <p style={{fontSize:13,color:'#94a3b8',lineHeight:1.8}}>{v.d}</p>
+        </div>
+      ))}
+    </div>
+    <div className="glass au2" style={{padding:'26px 30px'}}>
+      <h2 style={{fontSize:18,fontWeight:900,color:'#4ade80',marginBottom:20}}>محطات تاريخية</h2>
+      {[['1897','تأسيس مصلحة الطب البيطري'],['1952','إعادة الهيكلة بعد ثورة يوليو'],['1980','إنشاء معاهد البحوث البيطرية'],['2010','التفتيش الإلكتروني على المجازر'],['2026','إطلاق المنصة الرقمية']].map(([y,e],i)=>(
+        <div key={i} style={{display:'flex',gap:16,padding:'14px 0',borderBottom:i<4?'1px solid rgba(255,255,255,.05)':'none',alignItems:'flex-start'}}>
+          <span style={{color:'#4ade80',fontWeight:900,fontSize:12,fontFamily:'IBM Plex Mono',minWidth:34}}>{y}</span>
+          <div style={{width:10,height:10,borderRadius:'50%',background:'#22c55e',marginTop:3,flexShrink:0,boxShadow:'0 0 0 4px rgba(34,197,94,.15)'}}/>
+          <p style={{fontSize:13,color:'#94a3b8',lineHeight:1.7,flex:1}}>{e}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const MinisterPage=()=>(
+  <div style={{maxWidth:780,margin:'0 auto',padding:'44px 20px'}} className="pg">
+    <div style={{textAlign:'center',marginBottom:32}} className="au">
+      <div className="chip" style={{marginBottom:18,display:'inline-flex',background:'rgba(245,158,11,.1)',borderColor:'rgba(245,158,11,.3)',color:'#fbbf24'}}><Ico d={I.min} s={13}/>كلمة الوزير</div>
+      <h1 style={{fontSize:34,fontWeight:900,color:'#fff'}}>كلمة السيد الوزير</h1>
+    </div>
+    <div className="glass au1" style={{padding:'30px 34px',position:'relative',overflow:'hidden'}}>
+      <div style={{position:'absolute',top:0,right:0,width:180,height:180,background:'rgba(245,158,11,.04)',borderRadius:'50%',filter:'blur(60px)',pointerEvents:'none'}}/>
+      <div style={{display:'flex',alignItems:'center',gap:14,marginBottom:26,paddingBottom:22,borderBottom:'1px solid rgba(255,255,255,.08)'}}>
+        <div style={{width:72,height:72,borderRadius:18,background:'linear-gradient(135deg,rgba(34,197,94,.2),rgba(22,163,74,.08))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:32,flexShrink:0}}>👨‍💼</div>
+        <div>
+          <div style={{fontSize:17,fontWeight:900,color:'#f1f5f9'}}>أ.د. محمد عبدالعزيز</div>
+          <div style={{fontSize:12,color:'#4ade80',fontWeight:700,marginTop:2}}>وزير الزراعة واستصلاح الأراضي</div>
+          <div style={{fontSize:11,color:'#64748b',marginTop:3}}>جمهورية مصر العربية</div>
+        </div>
+      </div>
+      <div style={{fontFamily:'Amiri,serif',fontSize:16,color:'#cbd5e1',lineHeight:2.1}}>
+        <p style={{color:'#fbbf24',fontWeight:700,fontSize:17,marginBottom:14}}>بسم الله الرحمن الرحيم</p>
+        <p style={{marginBottom:14}}>أيها المواطنون الكرام، أيها الموردون والمنتجون الأعزاء،</p>
+        <p style={{marginBottom:14}}>يسعدني أن أقدم إليكم هذه المنصة الرقمية المتكاملة التي تمثل خطوة نوعية في مسيرة تحديث منظومة الثروة الحيوانية في مصر. إن هذه المنصة تعكس رؤية الدولة في التحول الرقمي وتوظيف التكنولوجيا لخدمة المواطن والمنتج على حد سواء.</p>
+        <p style={{color:'#4ade80',fontWeight:700,marginBottom:18}}>والله الموفق،،،</p>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',paddingTop:14,borderTop:'1px solid rgba(255,255,255,.08)'}}>
+          <div><div style={{color:'#f1f5f9',fontWeight:700}}>أ.د. محمد عبدالعزيز</div><div style={{color:'#64748b',fontSize:11,marginTop:2}}>مارس 2026</div></div>
+          <div style={{color:'#334155',fontSize:12,fontStyle:'italic'}}>[ توقيع رسمي ]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const ContactPage=()=>{
+  const [form,setForm]=useState({name:'',email:'',phone:'',msg:''});
+  const [sent,setSent]=useState(false);
+  const showToast=useContext(ToastContext);
+  const send=()=>{
+    if(!form.name||!form.email||!form.msg){showToast('يرجى ملء الحقول المطلوبة','error');return}
+    setSent(true);showToast('تم إرسال رسالتك بنجاح! ✅');
+  };
+  return(
+    <div style={{maxWidth:960,margin:'0 auto',padding:'44px 20px'}} className="pg">
+      <div className="au" style={{marginBottom:26}}><div className="sec-title">تواصل معنا</div><div className="sec-sub">نحن هنا لمساعدتك في أي استفسار</div></div>
+      <div style={{display:'grid',gridTemplateColumns:'2fr 3fr',gap:20}}>
+        <div style={{display:'flex',flexDirection:'column',gap:13}}>
+          {[
+            {ic:I.map,l:'العنوان',v:'4 شارع نادي الصيد، الدقي، الجيزة'},
+            {ic:I.phone,l:'هاتف',v:'+20-2-3761-XXXX'},
+            {ic:I.mail,l:'البريد',v:'info@gvs-egypt.gov.eg'},
+            {ic:I.cal,l:'مواعيد',v:'الأحد – الخميس: 8 ص – 3 م'},
+          ].map((c,i)=>(
+            <div key={i} className="glass" style={{padding:'15px 17px',display:'flex',gap:13,alignItems:'flex-start'}}>
+              <div style={{width:36,height:36,borderRadius:10,background:'rgba(34,197,94,.1)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}><Ico d={c.ic} s={16} c="text-green-400"/></div>
+              <div><div style={{fontSize:10,color:'#64748b',marginBottom:2}}>{c.l}</div><div style={{fontSize:13,fontWeight:600,color:'#f1f5f9'}}>{c.v}</div></div>
+            </div>
+          ))}
+        </div>
+        <div className="glass" style={{padding:'24px 26px'}}>
+          {sent?(
+            <div style={{textAlign:'center',padding:'24px 0'}}>
+              <div style={{width:58,height:58,borderRadius:'50%',background:'rgba(34,197,94,.12)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 14px'}}><Ico d={I.check} s={24} c="text-green-400"/></div>
+              <h3 style={{fontWeight:900,fontSize:17,color:'#f1f5f9',marginBottom:7}}>تم الإرسال!</h3>
+              <p style={{fontSize:13,color:'#94a3b8',marginBottom:18}}>سيتواصل معك فريقنا خلال 24 ساعة</p>
+              <button className="btn out-btn" onClick={()=>setSent(false)}>إرسال رسالة أخرى</button>
+            </div>
+          ):(
+            <>
+              <h2 style={{fontWeight:800,fontSize:15,color:'#4ade80',marginBottom:18}}>أرسل رسالة</h2>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:13,marginBottom:13}}>
+                <div><Label s="الاسم *"/><input value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} className="inp" placeholder="اسمك الكامل"/></div>
+                <div><Label s="البريد *"/><input value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} className="inp" placeholder="email@example.com" dir="ltr"/></div>
+              </div>
+              <div style={{marginBottom:13}}><Label s="الهاتف"/><input value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))} className="inp" placeholder="01X XXXX XXXX"/></div>
+              <div style={{marginBottom:18}}><Label s="الرسالة *"/><textarea value={form.msg} onChange={e=>setForm(f=>({...f,msg:e.target.value}))} rows={5} className="inp" placeholder="اكتب رسالتك..." style={{resize:'none'}}/></div>
+              <button className="btn bg-btn" style={{width:'100%',justifyContent:'center',fontSize:14}} onClick={send}><Ico d={I.mail} s={15}/>إرسال الرسالة</button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   PRODUCTS / CATEGORIES / PROFILE (simplified)
+══════════════════════════════════════════════ */
+const ProductsPage=()=>{
+  const [typeF,setTypeF]=useState('all');
+  const [q,setQ]=useState('');
+  const list=ANIMALS_12.filter(a=>typeF==='all'||a.type===typeF).filter(a=>!q||a.name.includes(q)||a.supplier.includes(q));
+  return(
+    <div style={{maxWidth:1100,margin:'0 auto',padding:'44px 20px'}} className="pg">
+      <div className="au" style={{marginBottom:26}}><div className="sec-title">الحيوانات المعروضة</div><div className="sec-sub">{ANIMALS_12.length} حيوان من موردين معتمدين</div></div>
+      <div className="glass au1" style={{padding:'13px 17px',marginBottom:20,display:'flex',gap:12,flexWrap:'wrap',alignItems:'center'}}>
+        <div style={{position:'relative',flex:1,minWidth:170}}>
+          <Ico d={I.search} s={13} c="" style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',color:'#64748b',pointerEvents:'none'}}/>
+          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="بحث..." className="inp" style={{paddingRight:32,fontSize:13}}/>
+        </div>
+        <div style={{display:'flex',gap:5}}>{[['all','الكل'],['بقر','أبقار'],['جاموس','جاموس']].map(([v,l])=>(
+          <button key={v} onClick={()=>setTypeF(v)} className={`tab ${typeF===v?'tba':''}`} style={{fontSize:12}}>{l}</button>
+        ))}</div>
+        <span style={{fontSize:11,color:'#64748b'}}>{list.length} نتيجة</span>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(225px,1fr))',gap:15}}>
+        {list.map((a,i)=><div key={i} className="au" style={{animationDelay:`${i*40}ms`}}><AnimalCard a={a}/></div>)}
+      </div>
+    </div>
+  );
+};
+
+const CatsPage=({setPage})=>(
+  <div style={{maxWidth:1100,margin:'0 auto',padding:'44px 20px'}} className="pg">
+    <div className="au" style={{marginBottom:30}}><div className="sec-title">فئات الحيوانات</div><div className="sec-sub">اختر الفئة لعرض التفاصيل وإدارة الحيوانات</div></div>
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:20}}>
+      {CATS.map((cat,i)=>(
+        <div key={cat.id} className="glass ghov au" style={{animationDelay:`${i*80}ms`,cursor:'pointer',overflow:'hidden',borderTop:`3px solid ${cat.color}`}} onClick={()=>setPage('cat-'+cat.id)}>
+          <div style={{padding:'26px 20px',textAlign:'center',background:`linear-gradient(135deg,${cat.bg},transparent)`}}>
+            <div style={{fontSize:60,marginBottom:8}} className="afloat">{cat.emoji}</div>
+          </div>
+          <div style={{padding:'0 20px 20px'}}>
+            <h3 style={{fontWeight:900,fontSize:16,color:'#f1f5f9',marginBottom:5}}>{cat.name}</h3>
+            <p style={{fontSize:12,color:'#94a3b8',marginBottom:12,lineHeight:1.7}}>{cat.desc}</p>
+            <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:14}}>
+              {cat.subTypes.slice(0,3).map(s=><span key={s} style={{background:'rgba(255,255,255,.05)',color:'#94a3b8',fontSize:10,padding:'3px 8px',borderRadius:50}}>{s}</span>)}
+            </div>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+              <span style={{background:cat.bg,color:cat.color,borderRadius:50,padding:'4px 12px',fontSize:12,fontWeight:800}}>{cat.count} حيوان</span>
+              <button className="btn out-btn sm-btn" style={{color:cat.color,borderColor:`${cat.color}50`}}>إدارة<Ico d={I.arr} s={11}/></button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ProfilePage=({user,setUser})=>{
+  const {authUser}=useContext(AuthContext);
+  const [tabP,setTabP]=useState('info');
+  const [editing,setEditing]=useState(false);
+  const [form,setForm]=useState({...user});
+  const showToast=useContext(ToastContext);
+  const fRef=useRef(null);
+  const govs=['القاهرة','الجيزة','الإسكندرية','الدقهلية','المنوفية','الفيوم','القليوبية'];
+  const save=()=>{setUser({...form});setEditing(false);showToast('تم حفظ التغييرات بنجاح ✅')};
+  const cancel=()=>{setForm({...user});setEditing(false)};
+  const handleAvatar=e=>{const f=e.target.files?.[0];if(f){const r=new FileReader();r.onload=ev=>setForm(p=>({...p,avatar:ev.target.result}));r.readAsDataURL(f);}};
+  const activity=[
+    {a:'تم قبول عرض بقرة هولشتاين #C-001',t:'منذ يومين',c:'#22c55e'},
+    {a:'إضافة جاموسة جديدة',t:'منذ 5 أيام',c:'#3b82f6'},
+    {a:'تحديث بيانات الملف الشخصي',t:'منذ أسبوع',c:'#64748b'},
+  ];
+  return(
+    <div style={{maxWidth:1020,margin:'0 auto',padding:'44px 20px'}} className="pg">
+      <div style={{display:'grid',gridTemplateColumns:'250px 1fr',gap:20,alignItems:'start'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:14}}>
+          <div className="glass" style={{padding:'22px 18px',textAlign:'center'}}>
+            <div style={{position:'relative',width:84,height:84,margin:'0 auto 14px'}}>
+              <div style={{width:84,height:84,borderRadius:'50%',background:'linear-gradient(135deg,#16a34a,#4ade80)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:30,fontWeight:900,color:'#fff',border:'3px solid rgba(34,197,94,.3)',overflow:'hidden'}}>
+                {form.avatar?<img src={form.avatar} style={{width:'100%',height:'100%',objectFit:'cover'}} alt=""/>:form.name[0]}
+              </div>
+              {editing&&<><button onClick={()=>fRef.current?.click()} style={{position:'absolute',bottom:0,left:0,width:26,height:26,borderRadius:'50%',background:'#16a34a',border:'2px solid #0b1612',display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer'}}><Ico d={I.cam} s={12} c="text-white"/></button><input ref={fRef} type="file" accept="image/*" onChange={handleAvatar} style={{display:'none'}}/></>}
+            </div>
+            <div style={{fontWeight:900,fontSize:15,color:'#f1f5f9',marginBottom:2}}>{user.name}</div>
+            <div style={{fontSize:12,color:'#4ade80',fontWeight:700,marginBottom:5}}>{user.role}</div>
+            <div style={{fontSize:11,color:'#64748b',marginBottom:12}}>عضو منذ {user.joined}</div>
+            <div className="badge bg" style={{justifyContent:'center'}}><span style={{width:6,height:6,borderRadius:'50%',background:'#22c55e'}}/>حساب نشط</div>
+            {authUser&&<div className="badge bb" style={{justifyContent:'center',marginTop:5}}><Ico d={I.shield} s={10}/>حساب مدير</div>}
+          </div>
+        </div>
+        <div>
+          <div style={{display:'flex',gap:4,marginBottom:16,borderBottom:'1px solid rgba(255,255,255,.06)',paddingBottom:8}}>
+            {[['info','المعلومات'],['security','الأمان'],['activity','النشاط']].map(([t,l])=>(
+              <button key={t} onClick={()=>setTabP(t)} className={`tab ${tabP===t?'tba':''}`}>{l}</button>
+            ))}
+          </div>
+          {tabP==='info'&&(
+            <div className="glass au" style={{padding:'20px 22px'}}>
+              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:18}}>
+                <div style={{fontWeight:800,fontSize:14,color:'#4ade80'}}>المعلومات الشخصية</div>
+                {!editing?<button className="btn gh-btn sm-btn" onClick={()=>setEditing(true)}><Ico d={I.edit} s={13}/>تعديل</button>
+                  :<div style={{display:'flex',gap:7}}><button className="btn gh-btn sm-btn" onClick={cancel}>إلغاء</button><button className="btn bg-btn sm-btn" onClick={save}><Ico d={I.save} s={13}/>حفظ</button></div>}
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:13}}>
+                {[{l:'الاسم',k:'name'},{l:'البريد',k:'email'},{l:'الهاتف',k:'phone'},{l:'رقم الهوية',k:'national_id'}].map(({l,k})=>(
+                  <div key={k}><Label s={l}/><input value={form[k]||''} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} className="inp" readOnly={!editing} style={{background:editing?'rgba(255,255,255,.05)':'rgba(255,255,255,.02)',cursor:editing?'text':'default'}}/></div>
+                ))}
+                <div><Label s="المحافظة"/>
+                  <select value={form.governorate||''} onChange={e=>setForm(f=>({...f,governorate:e.target.value}))} className="inp" disabled={!editing} style={{cursor:editing?'pointer':'default',background:editing?'rgba(255,255,255,.05)':'rgba(255,255,255,.02)'}}>
+                    {govs.map(g=><option key={g}>{g}</option>)}
+                  </select>
+                </div>
+                <div><Label s="المزرعة"/><input value={form.farm_name||''} onChange={e=>setForm(f=>({...f,farm_name:e.target.value}))} className="inp" readOnly={!editing} style={{background:editing?'rgba(255,255,255,.05)':'rgba(255,255,255,.02)'}}/></div>
+                <div style={{gridColumn:'1/-1'}}><Label s="نبذة"/><textarea value={form.bio||''} onChange={e=>setForm(f=>({...f,bio:e.target.value}))} className="inp" rows={3} readOnly={!editing} style={{resize:'none',background:editing?'rgba(255,255,255,.05)':'rgba(255,255,255,.02)'}}/></div>
+              </div>
+            </div>
+          )}
+          {tabP==='security'&&(
+            <div className="glass au" style={{padding:'20px 22px'}}>
+              <div style={{fontWeight:800,fontSize:14,color:'#4ade80',marginBottom:16}}>تغيير كلمة المرور</div>
+              <div style={{display:'flex',flexDirection:'column',gap:12,maxWidth:360}}>
+                <div><Label s="كلمة المرور الحالية"/><input type="password" className="inp" placeholder="••••••••"/></div>
+                <div><Label s="كلمة المرور الجديدة"/><input type="password" className="inp" placeholder="8 أحرف على الأقل"/></div>
+                <div><Label s="تأكيد كلمة المرور"/><input type="password" className="inp" placeholder="أعد الكتابة"/></div>
+                <button className="btn bg-btn" style={{alignSelf:'flex-start'}} onClick={()=>showToast('تم حفظ كلمة المرور ✅')}><Ico d={I.save} s={14}/>حفظ</button>
+              </div>
+            </div>
+          )}
+          {tabP==='activity'&&(
+            <div className="glass au" style={{padding:'20px 22px'}}>
+              <div style={{fontWeight:800,fontSize:14,color:'#4ade80',marginBottom:16}}>سجل النشاط</div>
+              {activity.map((item,i)=>(
+                <div key={i} style={{display:'flex',gap:12,padding:'12px 0',borderBottom:i<activity.length-1?'1px solid rgba(255,255,255,.04)':'none',alignItems:'flex-start'}}>
+                  <div style={{width:8,height:8,borderRadius:'50%',background:item.c,marginTop:5,flexShrink:0}}/>
+                  <div><div style={{fontSize:13,fontWeight:600,color:'#f1f5f9'}}>{item.a}</div><div style={{fontSize:11,color:'#64748b',marginTop:2}}>{item.t}</div></div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SupRegPage=({setPage})=>{
+  const [step,setStep]=useState(1);
+  const [done,setDone]=useState(false);
+  const [form,setForm]=useState({name:'',email:'',phone:'',national_id:'',address:'',gov:'القاهرة',farm_name:'',exp:'',animal_types:[],pw:'',cpw:''});
+  const showToast=useContext(ToastContext);
+  const govs=['القاهرة','الجيزة','الإسكندرية','الدقهلية','المنوفية','الفيوم','القليوبية'];
+  if(done)return(
+    <div style={{minHeight:'70vh',display:'flex',alignItems:'center',justifyContent:'center',padding:20}}>
+      <div className="glass asc" style={{padding:'48px 38px',textAlign:'center',maxWidth:400,width:'100%'}}>
+        <div style={{fontSize:56,marginBottom:14}}>🎉</div>
+        <h2 style={{fontSize:26,fontWeight:900,color:'#f1f5f9',marginBottom:7}}>تم التسجيل!</h2>
+        <p style={{color:'#94a3b8',marginBottom:18,lineHeight:1.8,fontSize:13}}>سيتم مراجعة طلبك خلال 2-3 أيام عمل</p>
+        <div className="badge bg" style={{justifyContent:'center',marginBottom:22,padding:'7px 18px',fontSize:13}}>رقم طلبك: SUP-2026-{Math.floor(Math.random()*9000+1000)}</div>
+        <button className="btn bg-btn" style={{width:'100%',justifyContent:'center'}} onClick={()=>setPage('home')}>العودة للرئيسية</button>
+      </div>
+    </div>
+  );
+  return(
+    <div style={{maxWidth:600,margin:'0 auto',padding:'44px 20px'}} className="pg">
+      <div style={{textAlign:'center',marginBottom:28}} className="au">
+        <h1 style={{fontSize:30,fontWeight:900,color:'#fff',marginBottom:5}}>تسجيل مورد جديد</h1>
+        <p style={{color:'#94a3b8',fontSize:13}}>انضم إلى شبكة الموردين المعتمدين</p>
+      </div>
+      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:26}} className="au1">
+        {['البيانات الشخصية','بيانات المزرعة','كلمة المرور'].map((s,i)=>(
+          <React.Fragment key={i}>
+            <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+              <div style={{width:30,height:30,borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:800,background:step>i+1?'#16a34a':step===i+1?'rgba(34,197,94,.15)':'rgba(255,255,255,.05)',color:step>i+1?'#fff':step===i+1?'#4ade80':'#64748b',border:step===i+1?'2px solid #22c55e':'2px solid transparent'}}>
+                {step>i+1?<Ico d={I.check} s={12}/>:i+1}
+              </div>
+              <span style={{fontSize:9,color:step===i+1?'#4ade80':'#64748b',fontWeight:600,textAlign:'center'}}>{s}</span>
+            </div>
+            {i<2&&<div style={{flex:1,height:2,background:step>i+1?'#16a34a':'rgba(255,255,255,.06)',borderRadius:50,marginBottom:16}}/>}
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="glass au2" style={{padding:'24px 26px'}}>
+        {step===1&&(
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:13}}>
+            {[{l:'الاسم الكامل *',k:'name',ph:'اسم كامل'},{l:'رقم الهوية *',k:'national_id',ph:'14 رقم'},{l:'البريد الإلكتروني *',k:'email',ph:'email@example.com'},{l:'رقم الهاتف *',k:'phone',ph:'01X XXXX XXXX'}].map(({l,k,ph})=>(
+              <div key={k}><Label s={l}/><input value={form[k]} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} className="inp" placeholder={ph} dir={k==='email'?'ltr':'rtl'}/></div>
+            ))}
+            <div style={{gridColumn:'1/-1'}}><Label s="العنوان التفصيلي *"/><input value={form.address} onChange={e=>setForm(f=>({...f,address:e.target.value}))} className="inp" placeholder="الشارع، المدينة"/></div>
+            <div><Label s="المحافظة"/><select value={form.gov} onChange={e=>setForm(f=>({...f,gov:e.target.value}))} className="inp" style={{cursor:'pointer'}}>{govs.map(g=><option key={g}>{g}</option>)}</select></div>
+          </div>
+        )}
+        {step===2&&(
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:13}}>
+            <div style={{gridColumn:'1/-1'}}><Label s="اسم المزرعة *"/><input value={form.farm_name} onChange={e=>setForm(f=>({...f,farm_name:e.target.value}))} className="inp" placeholder="اسم المزرعة"/></div>
+            <div><Label s="سنوات الخبرة"/><input value={form.exp} onChange={e=>setForm(f=>({...f,exp:e.target.value}))} className="inp" placeholder="مثال: 10 سنوات"/></div>
+            <div style={{gridColumn:'1/-1'}}>
+              <Label s="أنواع الحيوانات *"/>
+              <div style={{display:'flex',gap:7,flexWrap:'wrap',marginTop:4}}>
+                {['أبقار','جاموس','عجول','أغنام'].map(t=>(
+                  <button key={t} onClick={()=>setForm(f=>({...f,animal_types:f.animal_types.includes(t)?f.animal_types.filter(x=>x!==t):[...f.animal_types,t]}))}
+                    className="btn sm-btn" style={{background:form.animal_types.includes(t)?'rgba(34,197,94,.15)':'rgba(255,255,255,.04)',color:form.animal_types.includes(t)?'#4ade80':'#64748b',border:`1px solid ${form.animal_types.includes(t)?'rgba(34,197,94,.4)':'rgba(255,255,255,.1)'}`}}>
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+        {step===3&&(
+          <div style={{display:'flex',flexDirection:'column',gap:13}}>
+            <div><Label s="كلمة المرور *"/><input type="password" value={form.pw} onChange={e=>setForm(f=>({...f,pw:e.target.value}))} className="inp" placeholder="8 أحرف على الأقل" dir="ltr"/></div>
+            <div><Label s="تأكيد كلمة المرور *"/><input type="password" value={form.cpw} onChange={e=>setForm(f=>({...f,cpw:e.target.value}))} className="inp" placeholder="أعد الكتابة" dir="ltr"/></div>
+            <label style={{display:'flex',alignItems:'flex-start',gap:8,cursor:'pointer'}}>
+              <input type="checkbox" style={{width:14,height:14,marginTop:2,accentColor:'#16a34a'}}/>
+              <span style={{fontSize:12,color:'#94a3b8',lineHeight:1.7}}>أوافق على <span style={{color:'#4ade80'}}>شروط الاستخدام</span> وسياسة الخصوصية</span>
+            </label>
+          </div>
+        )}
+        <div style={{display:'flex',gap:9,marginTop:20}}>
+          {step>1&&<button className="btn gh-btn" onClick={()=>setStep(s=>s-1)}><Ico d={I.arrL} s={13}/>السابق</button>}
+          <button className="btn bg-btn" style={{flex:1,justifyContent:'center'}} onClick={()=>step<3?setStep(s=>s+1):(()=>{setDone(true);showToast('تم التسجيل بنجاح! ✅')})()}>
+            {step<3?<><span>التالي</span><Ico d={I.arr} s={13}/></>:<><Ico d={I.check} s={14}/>إرسال الطلب</>}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+const Footer=({setPage})=>(
+  <footer style={{borderTop:'1px solid rgba(255,255,255,.06)',padding:'40px 20px 22px',background:'#080f0b',marginTop:60}}>
+    <div style={{maxWidth:1100,margin:'0 auto'}}>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(190px,1fr))',gap:26,marginBottom:28}}>
+        <div>
+          <div style={{display:'flex',alignItems:'center',gap:9,marginBottom:12}}>
+            <div style={{width:32,height:32,borderRadius:9,background:'linear-gradient(135deg,#16a34a,#22c55e)',display:'flex',alignItems:'center',justifyContent:'center'}}><Ico d={I.cow} s={15} c="text-white"/></div>
+            <div style={{fontWeight:900,fontSize:11,color:'#4ade80'}}>الجهة العامة للخدمات البيطرية</div>
+          </div>
+          <p style={{fontSize:11,color:'#64748b',lineHeight:1.9}}>منصة رقمية رسمية لتداول الثروة الحيوانية تحت إشراف وزارة الزراعة المصرية</p>
+        </div>
+        <div>
+          <div style={{fontWeight:800,fontSize:11,color:'#94a3b8',marginBottom:10,textTransform:'uppercase',letterSpacing:'.05em'}}>روابط سريعة</div>
+          {[['home','الرئيسية'],['news','الأخبار'],['animals','الحيوانات'],['about','من نحن'],['research','البحوث']].map(([id,l])=>(
+            <button key={id} onClick={()=>setPage(id)} style={{display:'block',fontSize:12,color:'#64748b',marginBottom:6,border:'none',background:'none',cursor:'pointer',fontFamily:'Cairo',padding:0,textAlign:'right',transition:'color .2s'}} onMouseEnter={e=>e.target.style.color='#4ade80'} onMouseLeave={e=>e.target.style.color='#64748b'}>{l}</button>
+          ))}
+        </div>
+        <div>
+          <div style={{fontWeight:800,fontSize:11,color:'#94a3b8',marginBottom:10,textTransform:'uppercase',letterSpacing:'.05em'}}>تواصل</div>
+          <div style={{fontSize:11,color:'#64748b',lineHeight:2.2}}>
+            <div>📍 4 شارع نادي الصيد، الدقي، الجيزة</div>
+            <div>📞 +20-2-3761-XXXX</div>
+            <div>✉️ info@gvs-egypt.gov.eg</div>
+          </div>
+        </div>
+      </div>
+      <div style={{height:'1px',background:'rgba(255,255,255,.05)',marginBottom:16}}/>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+        <span style={{fontSize:10,color:'#334155'}}>© 2026 الجهة العامة للخدمات البيطرية — جمهورية مصر العربية</span>
+        <span style={{fontSize:10,color:'#334155',fontFamily:'IBM Plex Mono'}}>gvs-egypt.gov.eg</span>
+      </div>
+    </div>
+  </footer>
+);
+
+/* ══════════════════════════════════════════════
+   ROOT APP
+══════════════════════════════════════════════ */
+const App=()=>{
+  const [page,setPage]=useState('home');
+  const [user,setUser]=useState({...USER_DATA});
+  useEffect(()=>{window.scrollTo({top:0,behavior:'smooth'})},[page]);
+
+  const isAdmin=page==='admin';
+
+  let content=null;
+  if(page==='home')         content=<HomePage setPage={setPage}/>;
+  else if(page==='news')    content=<NewsPage setPage={setPage}/>;
+  else if(page==='animals') content=<CatsPage setPage={setPage}/>;
+  else if(page==='products') content=<ProductsPage/>;
+  else if(page==='about')   content=<AboutPage/>;
+  else if(page==='minister') content=<MinisterPage/>;
+  else if(page==='research') content=<ResearchPage/>;
+  else if(page==='contact') content=<ContactPage/>;
+  else if(page==='login')   content=<LoginPage setPage={setPage}/>;
+  else if(page==='access-denied') content=<AccessDeniedPage setPage={setPage}/>;
+  else if(page==='profile') content=<ProfilePage user={user} setUser={setUser}/>;
+  else if(page==='admin')   content=<ProtectedRoute requireAdmin={true} setPage={setPage}><AdminDashboard setPage={setPage}/></ProtectedRoute>;
+  else if(page==='supplier-register') content=<SupRegPage setPage={setPage}/>;
+  else if(page.startsWith('news-'))   content=<NewsDetail id={page.replace('news-','')} setPage={setPage}/>;
+  else if(page.startsWith('cat-'))    content=<div style={{maxWidth:1100,margin:'0 auto',padding:'44px 20px'}} className="pg"><div style={{display:'flex',gap:10,marginBottom:20,fontSize:12,color:'#64748b',alignItems:'center'}}><button onClick={()=>setPage('animals')} style={{border:'none',background:'none',color:'#4ade80',fontWeight:700,cursor:'pointer',fontFamily:'Cairo',fontSize:12}}>فئات الحيوانات</button><span>/</span><span style={{color:'#f1f5f9',fontWeight:700}}>{CATS.find(c=>c.id===page.replace('cat-',''))?.name}</span></div><p style={{color:'#94a3b8',textAlign:'center',marginTop:40}}>نظام إدارة هذه الفئة — انظر نسخة gvs-final.html للإدارة الكاملة</p></div>;
+  else content=<HomePage setPage={setPage}/>;
+
+  return(
+    <AuthProvider>
+      <ThemeProvider>
+        <DataProvider>
+          <ToastProvider>
+            <div style={{minHeight:'100vh',display:'flex',flexDirection:'column'}}>
+              <Navbar page={page} setPage={setPage} user={user}/>
+              <div style={{flex:1}}>{content}</div>
+              {!isAdmin&&page!=='login'&&<Footer setPage={setPage}/>}
+            </div>
+          </ToastProvider>
+        </DataProvider>
+      </ThemeProvider>
+    </AuthProvider>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
